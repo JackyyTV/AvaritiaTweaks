@@ -1,0 +1,15 @@
+#Key Bindings
+key.categories.avaritiatweaks=Avaritia Tweaks
+key.infinity_armor.noclip=Toggle No Clip Mode
+
+#Tooltips
+tooltips.avaritiatweaks.noclip.enabled=No Clip Mode: §a§lEnabled§r
+tooltips.avaritiatweaks.noclip.disabled=No Clip Mode: §c§lDisabled§r
+
+#Messages
+msg.avaritiatweaks.noclip.enabled=No Clip Mode is now §aEnabled§r
+msg.avaritiatweaks.noclip.disabled=No Clip Mode is now §cDisabled§r
+
+#JEI Descriptions
+desc.avaritiatweaks.neutron_pile=Produced from Neutron Collector.
+desc.avaritiatweaks.neutron_collector=The Neutron Collector collects a Pile of Neutrons every 7111 ticks, which is about 6 minutes in real life.
