@@ -13,19 +13,19 @@ import java.io.File;
 
 public class CommonProxy {
 
-	public static Configuration config;
+    public static Configuration config;
 
-	public void preInit(FMLPreInitializationEvent event) {
-		File configDir = event.getModConfigurationDirectory();
-		config = new Configuration(new File(configDir.getPath(), "AvaritiaTweaks.cfg"));
+    public void preInit(FMLPreInitializationEvent event) {
+        File configDir = event.getModConfigurationDirectory();
+        config = new Configuration(new File(configDir.getPath(), "AvaritiaTweaks.cfg"));
         PacketHandler.registerMessages(AvaritiaTweaks.MODID);
         MinecraftForge.EVENT_BUS.register(new ModEventsHandler());
-	}
+    }
 
-	public void init(FMLInitializationEvent event) {
-	}
+    public void init(FMLInitializationEvent event) {
+    }
 
-	public void postInit(FMLPostInitializationEvent event) {
-	}
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 
 }
