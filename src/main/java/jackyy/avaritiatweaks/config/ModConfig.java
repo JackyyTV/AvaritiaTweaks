@@ -38,6 +38,13 @@ public class ModConfig {
             @Config.Comment("If true, provides descriptions for some items on JEI")
             public boolean descriptions = true;
         }
+        @Config.Comment("If true, enables Botania integration")
+        public boolean botaniaIntegration = true;
+        public static Botania botania = new Botania();
+        public static class Botania {
+            @Config.Comment("If true, enables Gaia Block")
+            public boolean gaiaBlock = true;
+        }
     }
 
     public static class InfinityArmor {

@@ -145,8 +145,8 @@ public class ModEventsHandler {
             for (int x = 0; x < tooltip.size(); x++) {
                 if (tooltip.get(x).contains(I18n.format("attribute.name.generic.armorToughness"))) {
                     tooltip.add(x - 1, MAP.containsKey(event.getEntityPlayer()) && MAP.get(event.getEntityPlayer())
-                                    ? I18n.format("tooltips.avaritiatweaks.noclip.enabled")
-                                    : I18n.format("tooltips.avaritiatweaks.noclip.disabled"));
+                            ? I18n.format("tooltips.avaritiatweaks.noclip.enabled")
+                            : I18n.format("tooltips.avaritiatweaks.noclip.disabled"));
                     tooltip.add(x, " ");
                     return;
                 }

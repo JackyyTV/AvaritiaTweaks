@@ -1,9 +1,15 @@
+#Creative Tab
+itemGroup.avaritiatweaks=Avaritia Tweaks
+
 #Key Bindings
 key.categories.avaritiatweaks=Avaritia Tweaks
 key.infinity_armor.noclip=Toggle No Clip Mode
 
 #Items
 item.avaritiatweaks.enhancement_crystal.name=Enhancement Crystal
+
+#Blocks
+tile.avaritiatweaks.gaia_block.name=Gaia Block
 
 #Tooltips
 tooltips.avaritiatweaks.enhancement_crystal=Infinity isn't even enough.

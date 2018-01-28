@@ -2,6 +2,7 @@ package jackyy.avaritiatweaks.tweaks;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.util.TransformUtils;
+import jackyy.avaritiatweaks.block.BlockGaia;
 import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.item.ItemEnhancementCrystal;
 import morph.avaritia.client.render.item.HaloRenderItem;
@@ -10,20 +11,33 @@ import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ModTweaks {
 
+    public static List<ItemStack> itemList = new ArrayList<>();
+
     public static ItemEnhancementCrystal enhancementCrystal = new ItemEnhancementCrystal();
+    public static BlockGaia gaiaBlock = new BlockGaia();
 
     public static void initItems() {
         GameRegistry.register(enhancementCrystal);
+        GameRegistry.register(gaiaBlock);
+        GameRegistry.register(new ItemBlock(gaiaBlock), gaiaBlock.getRegistryName());
     }
 
     @SideOnly(Side.CLIENT)
@@ -32,6 +46,7 @@ public class ModTweaks {
         ModelLoader.setCustomModelResourceLocation(enhancementCrystal, 0, location);
         IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM, (modelRegistry) -> modelRegistry.getObject(location));
         ModelRegistryHelper.register(location, wrapped);
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(gaiaBlock), 0, new ModelResourceLocation(gaiaBlock.getRegistryName(), "inventory"));
     }
 
     public static void initRecipes() {
@@ -59,6 +74,25 @@ public class ModTweaks {
             addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_shovel), new ItemStack(ModItems.infinity_shovel), ModConfig.infinityTools.infinityShovelEnchantments);
             addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_bow), new ItemStack(ModItems.infinity_bow), ModConfig.infinityTools.infinityBowEnchantments);
         }
+        if (ModConfig.integrations.botaniaIntegration) {
+            if (ModConfig.Integrations.botania.gaiaBlock && Loader.isModLoaded("Botania")) {
+                GameRegistry.addShapedRecipe(
+                        new ItemStack(gaiaBlock),
+                        "XXX", "XXX", "XXX",
+                        'X', getStackFromName("botania:manaResource", 1, 14)
+                );
+                GameRegistry.addShapelessRecipe(getStackFromName("botania:manaResource", 9, 14), new ItemStack(gaiaBlock));
+            }
+        }
+    }
+
+    private static ItemStack getStackFromName(String name, int amount, int meta) {
+        Item item = Item.REGISTRY.getObject(new ResourceLocation(name));
+        ItemStack stack = new ItemStack(Blocks.STONE);
+        if (item != null) {
+            stack = new ItemStack(item, amount, meta);
+        }
+        return stack;
     }
 
     private static ItemStack getInfPick(ItemStack stack) {
@@ -74,6 +108,7 @@ public class ModTweaks {
         } else {
             output.getTagCompound().setInteger("enhanced", 1);
         }
+        itemList.add(output);
         GameRegistry.addShapelessRecipe(output, input, enhancementCrystal);
         GameRegistry.addShapelessRecipe(input, output);
     }
@@ -94,6 +129,7 @@ public class ModTweaks {
                 output.addEnchantment(enchantment, level);
             }
         }
+        itemList.add(output);
         GameRegistry.addShapelessRecipe(output, input, enhancementCrystal);
         GameRegistry.addShapelessRecipe(input, output);
     }

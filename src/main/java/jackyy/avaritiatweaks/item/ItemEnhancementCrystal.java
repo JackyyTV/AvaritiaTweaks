@@ -2,7 +2,6 @@ package jackyy.avaritiatweaks.item;
 
 import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.config.ModConfig;
-import morph.avaritia.Avaritia;
 import morph.avaritia.api.IHaloRenderItem;
 import morph.avaritia.entity.EntityImmortalItem;
 import morph.avaritia.init.AvaritiaTextures;
@@ -27,7 +26,7 @@ public class ItemEnhancementCrystal extends Item implements IHaloRenderItem {
     public ItemEnhancementCrystal() {
         setRegistryName("enhancement_crystal");
         setUnlocalizedName(AvaritiaTweaks.MODID + ".enhancement_crystal");
-        setCreativeTab(Avaritia.tab);
+        setCreativeTab(AvaritiaTweaks.TAB);
     }
 
     @Override @SideOnly(Side.CLIENT)
@@ -36,9 +35,9 @@ public class ItemEnhancementCrystal extends Item implements IHaloRenderItem {
     }
 
     @Override @SideOnly(Side.CLIENT)
-    public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
         if (ModConfig.tweaks.enableEnhancementCrystal) {
-            subItems.add(new ItemStack(itemIn));
+            list.add(new ItemStack(item));
         }
     }
 
