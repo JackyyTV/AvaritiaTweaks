@@ -1,5 +1,6 @@
 package jackyy.avaritiatweaks.integrations.jei;
 
+import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.integrations.jei.compressor.CompressorRecipeCategory;
 import jackyy.avaritiatweaks.integrations.jei.compressor.CompressorRecipeHandler;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
@@ -31,21 +32,26 @@ public class JEIIntegration implements IModPlugin {
 
     @Override
     public void register(IModRegistry registry) {
-        jeiHelpers = registry.getJeiHelpers();
-        IGuiHelper helper = jeiHelpers.getGuiHelper();
-        ResourceLocation location = new ResourceLocation("avaritia:textures/gui/compressor.png");
-        neutronium_compressor = helper.createDrawable(location, 37, 29, 102, 41);
-        static_singularity = helper.createDrawable(location, 176, 16, 16, 16);
+        if (ModConfig.integrations.jeiIntegration) {
+            if (ModConfig.Integrations.jei.neutroniumCompressor) {
+                jeiHelpers = registry.getJeiHelpers();
+                IGuiHelper helper = jeiHelpers.getGuiHelper();
+                ResourceLocation location = new ResourceLocation("avaritia:textures/gui/compressor.png");
+                neutronium_compressor = helper.createDrawable(location, 37, 29, 102, 41);
+                static_singularity = helper.createDrawable(location, 176, 16, 16, 16);
 
-        registry.addRecipeCategories(new CompressorRecipeCategory());
-        registry.addRecipeHandlers(new CompressorRecipeHandler());
-        registry.addRecipeClickArea(GUINeutroniumCompressor.class, 62, 35, 22, 15, NEUTRONIUM_COMPRESSOR);
-        registry.addRecipeCategoryCraftingItem(new ItemStack(ModBlocks.neutronium_compressor), NEUTRONIUM_COMPRESSOR);
-        registry.addRecipes(CompressorManager.getRecipes());
-
-        registry.addDescription(ModItems.neutron_pile, "desc.avaritiatweaks.neutron_pile");
-        registry.addDescription(new ItemStack(ModBlocks.neutron_collector), "desc.avaritiatweaks.neutron_collector");
-        registry.addDescription(new ItemStack(ModTweaks.enhancementCrystal), "desc.avaritiatweaks.enhancement_crystal");
+                registry.addRecipeCategories(new CompressorRecipeCategory());
+                registry.addRecipeHandlers(new CompressorRecipeHandler());
+                registry.addRecipeClickArea(GUINeutroniumCompressor.class, 62, 35, 22, 15, NEUTRONIUM_COMPRESSOR);
+                registry.addRecipeCategoryCraftingItem(new ItemStack(ModBlocks.neutronium_compressor), NEUTRONIUM_COMPRESSOR);
+                registry.addRecipes(CompressorManager.getRecipes());
+            }
+            if (ModConfig.Integrations.jei.descriptions) {
+                registry.addDescription(ModItems.neutron_pile, "desc.avaritiatweaks.neutron_pile");
+                registry.addDescription(new ItemStack(ModBlocks.neutron_collector), "desc.avaritiatweaks.neutron_collector");
+                registry.addDescription(new ItemStack(ModTweaks.enhancementCrystal), "desc.avaritiatweaks.enhancement_crystal");
+            }
+        }
     }
 
     @Override

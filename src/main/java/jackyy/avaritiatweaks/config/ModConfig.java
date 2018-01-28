@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ModConfig {
 
     public static Tweaks tweaks = new Tweaks();
+    public static Integrations integrations = new Integrations();
     public static InfinityArmor infinityArmor = new InfinityArmor();
     public static InfinityTools infinityTools = new InfinityTools();
 
@@ -25,6 +26,18 @@ public class ModConfig {
                 "e.g. Enchantments, Potion Effects, etc."
         })
         public boolean enableEnhancementCrystal = true;
+    }
+
+    public static class Integrations {
+        @Config.Comment("If true, enables JEI integration")
+        public boolean jeiIntegration = true;
+        public static JEI jei = new JEI();
+        public static class JEI {
+            @Config.Comment("If true, enables Neutronium Compressor recipes integration on JEI")
+            public boolean neutroniumCompressor = true;
+            @Config.Comment("If true, provides descriptions for some items on JEI")
+            public boolean descriptions = true;
+        }
     }
 
     public static class InfinityArmor {
