@@ -2,6 +2,7 @@ package jackyy.avaritiatweaks.integrations.jei;
 
 import jackyy.avaritiatweaks.integrations.jei.compressor.CompressorRecipeCategory;
 import jackyy.avaritiatweaks.integrations.jei.compressor.CompressorRecipeHandler;
+import jackyy.avaritiatweaks.tweaks.ModTweaks;
 import mezz.jei.api.*;
 import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
@@ -44,6 +45,7 @@ public class JEIIntegration implements IModPlugin {
 
         registry.addDescription(ModItems.neutron_pile, "desc.avaritiatweaks.neutron_pile");
         registry.addDescription(new ItemStack(ModBlocks.neutron_collector), "desc.avaritiatweaks.neutron_collector");
+        registry.addDescription(new ItemStack(ModTweaks.enhancementCrystal), "desc.avaritiatweaks.enhancement_crystal");
     }
 
     @Override

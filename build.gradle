@@ -32,11 +32,15 @@ repositories {
         name = "JEI Maven"
         url = "http://dvs1.progwml6.com/files/maven"
     }
-	maven {
+    maven {
         name = "Hwyla Maven"
-		url = "https://tehnut.info/maven"
-	}
-	maven {
+        url = "https://tehnut.info/maven"
+    }
+    maven {
+        name = "CB Maven"
+        url = "http://chickenbones.net/maven"
+    }
+    maven {
         name = "CoFH Maven"
         url = "http://maven.covers1624.net"
     }
@@ -46,6 +50,7 @@ dependencies {
 	compile files('libs/')
 	deobfCompile "mezz.jei:jei_1.10.2:+"
 	deobfCompile "mcp.mobius.waila:Hwyla:1.8.17-B31_1.10.2"
+	deobfCompile "codechicken:CodeChickenLib:1.10.2-+:universal"
 }
 
 processResources {

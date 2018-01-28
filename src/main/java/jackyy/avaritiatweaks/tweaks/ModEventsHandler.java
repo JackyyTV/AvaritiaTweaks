@@ -15,6 +15,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -34,6 +35,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ModEventsHandler {
@@ -60,8 +62,8 @@ public class ModEventsHandler {
                 ModItems.infinity_pickaxe.onBlockStartBreak(player.getHeldItemMainhand(), pos, player);
             } else {
                 ItemStack drop = block.getPickBlock(state, new RayTraceResult(vec, facing), world, pos, player);
-                world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), drop));
                 event.getWorld().destroyBlock(pos, false);
+                world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), drop));
             }
         }
     }
@@ -71,26 +73,18 @@ public class ModEventsHandler {
         if (event.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer)event.getEntityLiving();
             if (isArmorValid(player, EntityEquipmentSlot.HEAD)) {
-                for (String potion : ModConfig.infinityArmor.infinityHelmetPotionEffects) {
-                    player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation(potion), 300, 0, false, false));
-                }
+                checkAndAddEffect(player, ModConfig.infinityArmor.infinityHelmetPotionEffects);
             }
             if (isArmorValid(player, EntityEquipmentSlot.CHEST)) {
-                for (String potion : ModConfig.infinityArmor.infinityChestplatePotionEffects) {
-                    player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation(potion), 300, 0, false, false));
-                }
+                checkAndAddEffect(player, ModConfig.infinityArmor.infinityChestplatePotionEffects);
             }
             if (isArmorValid(player, EntityEquipmentSlot.LEGS)) {
-                for (String potion : ModConfig.infinityArmor.infinityLeggingsPotionEffects) {
-                    player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation(potion), 300, 0, false, false));
-                }
+                checkAndAddEffect(player, ModConfig.infinityArmor.infinityLeggingsPotionEffects);
             }
             if (isArmorValid(player, EntityEquipmentSlot.FEET)) {
-                for (String potion : ModConfig.infinityArmor.infinityBootsPotionEffects) {
-                    player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation(potion), 300, 0, false, false));
-                }
+                checkAndAddEffect(player, ModConfig.infinityArmor.infinityBootsPotionEffects);
             }
-            if (AvaritiaEventHandler.isInfinite(player) && noClip) {
+            if (isArmorValid(player, EntityEquipmentSlot.CHEST) && AvaritiaEventHandler.isInfinite(player) && noClip) {
                 player.capabilities.isFlying = true;
                 player.noClip = true;
             }
@@ -103,45 +97,58 @@ public class ModEventsHandler {
         }
     }
 
-    private boolean isArmorValid(EntityPlayer player, EntityEquipmentSlot slot) {
+    private static boolean isArmorValid(EntityPlayer player, EntityEquipmentSlot slot) {
         ItemStack armor = player.getItemStackFromSlot(slot);
-        return armor != null && armor.getItem() instanceof ItemArmorInfinity;
+        return armor != null && armor.getItem() instanceof ItemArmorInfinity
+                && armor.getTagCompound() != null && armor.getTagCompound().getInteger("enhanced") == 1;
+    }
+
+    private static void checkAndAddEffect(EntityPlayer player, String[] potions) {
+        for (String potion : potions) {
+            Potion effect = Potion.getPotionFromResourceLocation(potion);
+            if (effect != null) {
+                player.addPotionEffect(new PotionEffect(effect, 300, 0, false, false));
+            }
+        }
     }
 
     public static void toggleNoClip(EntityPlayer player) {
-        if (MAP.containsKey(player) && MAP.get(player)) {
-            MAP.remove(player);
-            noClip = false;
-            player.addChatComponentMessage(new TextComponentTranslation("msg.avaritiatweaks.noclip.disabled"));
-        } else {
-            MAP.put(player, true);
-            noClip = true;
-            player.addChatComponentMessage(new TextComponentTranslation("msg.avaritiatweaks.noclip.enabled"));
+        if (isArmorValid(player, EntityEquipmentSlot.CHEST)) {
+            if (MAP.containsKey(player) && MAP.get(player)) {
+                MAP.remove(player);
+                noClip = false;
+                player.addChatComponentMessage(new TextComponentTranslation("msg.avaritiatweaks.noclip.disabled"));
+            } else {
+                MAP.put(player, true);
+                noClip = true;
+                player.addChatComponentMessage(new TextComponentTranslation("msg.avaritiatweaks.noclip.enabled"));
+            }
         }
     }
 
     @SubscribeEvent @SideOnly(Side.CLIENT)
     public void onTooltip(ItemTooltipEvent event) {
-        if (event.getItemStack().getItem() instanceof ItemSwordInfinity && ModConfig.tweaks.fixInfinitySwordTooltip) {
-            for (int x = 0; x < event.getToolTip().size(); x++) {
-                if (event.getToolTip().get(x).contains(I18n.format("attribute.name.generic.attackDamage"))) {
-                    event.getToolTip().set(x, " " + TextUtils.makeFabulous(I18n.format("tip.infinity")) + " " + TextFormatting.GRAY + I18n.format("attribute.name.generic.attackDamage"));
+        ItemStack stack = event.getItemStack();
+        Item item = stack.getItem();
+        List<String> tooltip = event.getToolTip();
+        if (item instanceof ItemSwordInfinity && ModConfig.tweaks.fixInfinitySwordTooltip) {
+            for (int x = 0; x < tooltip.size(); x++) {
+                if (tooltip.get(x).contains(I18n.format("attribute.name.generic.attackDamage"))) {
+                    tooltip.set(x, " " + TextUtils.makeFabulous(I18n.format("tip.infinity")) + " "
+                            + TextFormatting.GRAY + I18n.format("attribute.name.generic.attackDamage"));
                     return;
                 }
             }
         }
-        if (event.getItemStack().getItem() == ModItems.infinity_chestplate && ModConfig.infinityArmor.infinityArmorNoClip) {
-            for (int x = 0; x < event.getToolTip().size(); x++) {
-                if (event.getToolTip().get(x).contains(I18n.format("attribute.name.generic.armorToughness"))) {
-                    if (MAP.containsKey(event.getEntityPlayer()) && MAP.get(event.getEntityPlayer())) {
-                        event.getToolTip().add(x - 1, I18n.format("tooltips.avaritiatweaks.noclip.enabled"));
-                        event.getToolTip().add(x, " ");
-                        return;
-                    } else {
-                        event.getToolTip().add(x - 1, I18n.format("tooltips.avaritiatweaks.noclip.disabled"));
-                        event.getToolTip().add(x, " ");
-                        return;
-                    }
+        if (item == ModItems.infinity_chestplate && ModConfig.infinityArmor.infinityArmorNoClip
+                && stack.getTagCompound() != null && stack.getTagCompound().getInteger("enhanced") == 1) {
+            for (int x = 0; x < tooltip.size(); x++) {
+                if (tooltip.get(x).contains(I18n.format("attribute.name.generic.armorToughness"))) {
+                    tooltip.add(x - 1, MAP.containsKey(event.getEntityPlayer()) && MAP.get(event.getEntityPlayer())
+                                    ? I18n.format("tooltips.avaritiatweaks.noclip.enabled")
+                                    : I18n.format("tooltips.avaritiatweaks.noclip.disabled"));
+                    tooltip.add(x, " ");
+                    return;
                 }
             }
         }
