@@ -24,12 +24,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModTweaks {
-
-    public static List<ItemStack> itemList = new ArrayList<>();
 
     public static ItemEnhancementCrystal enhancementCrystal = new ItemEnhancementCrystal();
     public static BlockGaia gaiaBlock = new BlockGaia();
@@ -108,7 +103,6 @@ public class ModTweaks {
         } else {
             output.getTagCompound().setInteger("enhanced", 1);
         }
-        itemList.add(output);
         GameRegistry.addShapelessRecipe(output, input, enhancementCrystal);
         GameRegistry.addShapelessRecipe(input, output);
     }
@@ -129,7 +123,6 @@ public class ModTweaks {
                 output.addEnchantment(enchantment, level);
             }
         }
-        itemList.add(output);
         GameRegistry.addShapelessRecipe(output, input, enhancementCrystal);
         GameRegistry.addShapelessRecipe(input, output);
     }
