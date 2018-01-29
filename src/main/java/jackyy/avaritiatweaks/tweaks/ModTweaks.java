@@ -11,7 +11,6 @@ import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -83,7 +82,7 @@ public class ModTweaks {
 
     private static ItemStack getStackFromName(String name, int amount, int meta) {
         Item item = Item.REGISTRY.getObject(new ResourceLocation(name));
-        ItemStack stack = new ItemStack(Blocks.STONE);
+        ItemStack stack = null;
         if (item != null) {
             stack = new ItemStack(item, amount, meta);
         }
