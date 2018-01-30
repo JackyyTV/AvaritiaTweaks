@@ -1,11 +1,18 @@
 package jackyy.avaritiatweaks.config;
 
 import jackyy.avaritiatweaks.AvaritiaTweaks;
+import jackyy.avaritiatweaks.util.ModUtils;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.io.File;
+import java.lang.invoke.MethodHandle;
+import java.util.Map;
+import java.util.Optional;
 
 @Config(modid = AvaritiaTweaks.MODID, name = "AvaritiaTweaks")
 public class ModConfig {
@@ -114,6 +121,23 @@ public class ModConfig {
 
     @Mod.EventBusSubscriber
     public static class ConfigHolder {
+        private static final MethodHandle CONFIGS_GETTER = ModUtils.findFieldGetter(ConfigManager.class, "CONFIGS");
+        private static Configuration config;
+        @SuppressWarnings("unchecked")
+        public static Configuration getConfig() {
+            if (config == null) {
+                try {
+                    final String fileName = "AvaritiaTweaks.cfg";
+                    final Map<String, Configuration> configsMap = (Map<String, Configuration>) CONFIGS_GETTER.invokeExact();
+                    final Optional<Map.Entry<String, Configuration>> entryOptional = configsMap.entrySet().stream()
+                            .filter(entry -> fileName.equals(new File(entry.getKey()).getName())).findFirst();
+                    entryOptional.ifPresent(stringConfigurationEntry -> config = stringConfigurationEntry.getValue());
+                } catch (Throwable throwable) {
+                    AvaritiaTweaks.logger.error("Failed to get Configuration instance!", throwable);
+                }
+            }
+            return config;
+        }
         @SubscribeEvent
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
             if (event.getModID().equals(AvaritiaTweaks.MODID)) {
