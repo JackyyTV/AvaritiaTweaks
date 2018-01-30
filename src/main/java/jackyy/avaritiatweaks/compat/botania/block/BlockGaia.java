@@ -33,7 +33,7 @@ public class BlockGaia extends Block {
     @Override @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         if (ModConfig.compats.botaniaCompat) {
-            if (ModConfig.Compats.botania.gaiaBlock && Loader.isModLoaded("botania")) {
+            if (ModConfig.compats.botania.gaiaBlock && Loader.isModLoaded("botania")) {
                 list.add(new ItemStack(item));
             }
         }

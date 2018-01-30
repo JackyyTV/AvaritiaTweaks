@@ -31,14 +31,14 @@ public class ModConfig {
     public static class Compats {
         @Config.Comment("If true, enables JEI compat")
         public boolean jeiCompat = true;
-        public static JEI jei = new JEI();
+        public JEI jei = new JEI();
         public static class JEI {
             @Config.Comment("If true, provides descriptions for some items on JEI")
             public boolean descriptions = true;
         }
         @Config.Comment("If true, enables Botania compat")
         public boolean botaniaCompat = true;
-        public static Botania botania = new Botania();
+        public Botania botania = new Botania();
         public static class Botania {
             @Config.Comment("If true, enables Gaia Block")
             public boolean gaiaBlock = true;

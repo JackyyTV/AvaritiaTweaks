@@ -28,7 +28,7 @@ public class JEICompat implements IModPlugin {
     @Override
     public void register(IModRegistry registry) {
         if (ModConfig.compats.jeiCompat) {
-            if (ModConfig.Compats.jei.descriptions) {
+            if (ModConfig.compats.jei.descriptions) {
                 registry.addIngredientInfo(ModItems.neutron_pile, ItemStack.class, "desc.avaritiatweaks.neutron_pile");
                 registry.addIngredientInfo(new ItemStack(ModBlocks.neutron_collector), ItemStack.class, "desc.avaritiatweaks.neutron_collector");
                 registry.addIngredientInfo(new ItemStack(ModTweaks.enhancementCrystal), ItemStack.class, "desc.avaritiatweaks.enhancement_crystal");
