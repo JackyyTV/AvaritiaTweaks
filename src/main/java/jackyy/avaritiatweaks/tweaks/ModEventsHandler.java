@@ -54,7 +54,7 @@ public class ModEventsHandler {
         EnumFacing facing = event.getFace();
         Vec3d vec = event.getHitVec();
         if (!ModConfig.tweaks.makeWorldBreakerGreatAgain || facing == null || world.isRemote
-                || stack == null || player.getHeldItemMainhand() == null || player.capabilities.isCreativeMode) {
+                || stack == ItemStack.EMPTY || player.getHeldItemMainhand() == ItemStack.EMPTY || player.capabilities.isCreativeMode) {
             return;
         }
         if (state.getBlockHardness(world, pos) <= -1 && stack.getItem() == ModItems.infinity_pickaxe) {
@@ -63,7 +63,7 @@ public class ModEventsHandler {
             } else {
                 ItemStack drop = block.getPickBlock(state, new RayTraceResult(vec, facing), world, pos, player);
                 event.getWorld().destroyBlock(pos, false);
-                world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), drop));
+                world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), drop));
             }
         }
     }
@@ -99,7 +99,7 @@ public class ModEventsHandler {
 
     private static boolean isArmorValid(EntityPlayer player, EntityEquipmentSlot slot) {
         ItemStack armor = player.getItemStackFromSlot(slot);
-        return armor != null && armor.getItem() instanceof ItemArmorInfinity
+        return armor != ItemStack.EMPTY && armor.getItem() instanceof ItemArmorInfinity
                 && armor.getTagCompound() != null && armor.getTagCompound().getInteger("enhanced") == 1;
     }
 
@@ -117,11 +117,11 @@ public class ModEventsHandler {
             if (MAP.containsKey(player) && MAP.get(player)) {
                 MAP.remove(player);
                 noClip = false;
-                player.addChatComponentMessage(new TextComponentTranslation("msg.avaritiatweaks.noclip.disabled"));
+                player.sendStatusMessage(new TextComponentTranslation("msg.avaritiatweaks.noclip.disabled"), true);
             } else {
                 MAP.put(player, true);
                 noClip = true;
-                player.addChatComponentMessage(new TextComponentTranslation("msg.avaritiatweaks.noclip.enabled"));
+                player.sendStatusMessage(new TextComponentTranslation("msg.avaritiatweaks.noclip.enabled"), true);
             }
         }
     }

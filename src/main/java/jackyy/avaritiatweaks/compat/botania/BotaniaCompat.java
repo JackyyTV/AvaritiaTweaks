@@ -87,9 +87,9 @@ public class BotaniaCompat {
             GameRegistry.addShapedRecipe(
                     new ItemStack(gaiaBlock),
                     "XXX", "XXX", "XXX",
-                    'X', ModUtils.getStackFromName("botania:manaResource", 1, 14)
+                    'X', ModUtils.getStackFromName("botania:manaresource", 1, 14)
             );
-            GameRegistry.addShapelessRecipe(ModUtils.getStackFromName("botania:manaResource", 9, 14), new ItemStack(gaiaBlock));
+            GameRegistry.addShapelessRecipe(ModUtils.getStackFromName("botania:manaresource", 9, 14), new ItemStack(gaiaBlock));
         }
         if (ModConfig.Compats.botania.asgardandelion) {
             ExtremeCraftingManager.getInstance().addRecipe(asgardandelion,

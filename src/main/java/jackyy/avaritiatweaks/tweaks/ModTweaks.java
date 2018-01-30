@@ -57,19 +57,20 @@ public class ModTweaks {
             ModUtils.addEnhancementToolsRecipe(ModUtils.getInfPick(new ItemStack(ModItems.infinity_pickaxe)), ModUtils.getInfPick(new ItemStack(ModItems.infinity_pickaxe)), ModConfig.infinityTools.infinityPickaxeEnchantments);
             ModUtils.addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_axe), new ItemStack(ModItems.infinity_axe), ModConfig.infinityTools.infinityAxeEnchantments);
             ModUtils.addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_shovel), new ItemStack(ModItems.infinity_shovel), ModConfig.infinityTools.infinityShovelEnchantments);
+            ModUtils.addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_hoe), new ItemStack(ModItems.infinity_hoe), ModConfig.infinityTools.infinityHoeEnchantments);
             ModUtils.addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_bow), new ItemStack(ModItems.infinity_bow), ModConfig.infinityTools.infinityBowEnchantments);
         }
     }
 
     public static void preInitIntegrations() {
-        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("Botania")) {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
             BotaniaCompat.preInit();
             BotaniaCompat.initRecipes();
         }
     }
 
     public static void initIntegrations() {
-        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("Botania")) {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
             BotaniaCompat.init();
         }
     }

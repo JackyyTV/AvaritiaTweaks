@@ -18,7 +18,7 @@ public class PacketToggleNoClip implements IMessage, IMessageHandler<PacketToggl
 
     @Override
     public IMessage onMessage(PacketToggleNoClip message, MessageContext context) {
-        EntityPlayerMP playerMP = context.getServerHandler().playerEntity;
+        EntityPlayerMP playerMP = context.getServerHandler().player;
         if (AvaritiaEventHandler.isInfinite(playerMP)) {
             ModEventsHandler.toggleNoClip(playerMP);
         }

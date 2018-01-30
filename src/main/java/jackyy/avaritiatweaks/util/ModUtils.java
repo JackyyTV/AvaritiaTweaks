@@ -18,7 +18,7 @@ public class ModUtils {
 
     public static ItemStack getStackFromName(String name, int amount, int meta) {
         Item item = Item.REGISTRY.getObject(new ResourceLocation(name));
-        ItemStack stack = null;
+        ItemStack stack = ItemStack.EMPTY;
         if (item != null) {
             stack = new ItemStack(item, amount, meta);
         }

@@ -10,13 +10,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 public class BlockGaia extends Block {
 
@@ -32,9 +31,9 @@ public class BlockGaia extends Block {
     }
 
     @Override @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
+    public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         if (ModConfig.compats.botaniaCompat) {
-            if (ModConfig.Compats.botania.gaiaBlock && Loader.isModLoaded("Botania")) {
+            if (ModConfig.Compats.botania.gaiaBlock && Loader.isModLoaded("botania")) {
                 list.add(new ItemStack(item));
             }
         }

@@ -44,13 +44,18 @@ repositories {
         name = "CoFH Maven"
         url = "http://maven.covers1624.net"
     }
+    maven {
+        name = "CraftTweaker Maven"
+        url = "http://maven.blamejared.com"
+    }
 }
 
 dependencies {
 	compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.10.2:+"
-	deobfCompile "mcp.mobius.waila:Hwyla:1.8.17-B31_1.10.2"
-	deobfCompile "codechicken:CodeChickenLib:1.10.2-+:universal"
+	deobfCompile "mezz.jei:jei_1.11.2:+"
+	deobfCompile "mcp.mobius.waila:Hwyla:1.8.22-B37_1.11"
+	deobfCompile "codechicken:CodeChickenLib:1.11.2-+:universal"
+  deobfCompile "morph.avaritia:Avaritia:1.11.2-+:universal"
 }
 
 processResources {
