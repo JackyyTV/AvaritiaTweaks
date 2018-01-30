@@ -8,9 +8,9 @@ import morph.avaritia.init.AvaritiaTextures;
 import morph.avaritia.init.ModItems;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,14 +31,16 @@ public class ItemEnhancementCrystal extends Item implements IHaloRenderItem {
     }
 
     @Override @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack item, EntityPlayer player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack item, World world, List<String> tooltip, ITooltipFlag advanced) {
         tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format("tooltips.avaritiatweaks.enhancement_crystal"));
     }
 
     @Override @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (ModConfig.tweaks.enableEnhancementCrystal) {
-            list.add(new ItemStack(item));
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+        if (isInCreativeTab(tab)) {
+            if (ModConfig.tweaks.enableEnhancementCrystal) {
+                list.add(new ItemStack(this));
+            }
         }
     }
 

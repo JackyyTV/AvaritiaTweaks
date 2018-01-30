@@ -1,10 +1,12 @@
 package jackyy.avaritiatweaks.util;
 
+import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -33,7 +35,7 @@ public class ModUtils {
         return stack;
     }
 
-    public static void addEnhancementArmorRecipe(ItemStack input, ItemStack output) {
+    public static void addEnhancementArmorRecipe(String name, ItemStack input, ItemStack output) {
         NBTTagCompound enhancedTag = new NBTTagCompound();
         enhancedTag.setInteger("enhanced", 1);
         if (output.getTagCompound() == null) {
@@ -41,11 +43,11 @@ public class ModUtils {
         } else {
             output.getTagCompound().setInteger("enhanced", 1);
         }
-        GameRegistry.addShapelessRecipe(output, input, ModTweaks.enhancementCrystal);
-        GameRegistry.addShapelessRecipe(input, output);
+        GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_upgrade"), null, output, Ingredient.fromStacks(input), Ingredient.fromStacks(new ItemStack(ModTweaks.enhancementCrystal)));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_remove"), null, input, Ingredient.fromStacks(output));
     }
 
-    public static void addEnhancementToolsRecipe(ItemStack input, ItemStack output, String[] enchants) {
+    public static void addEnhancementToolsRecipe(String name, ItemStack input, ItemStack output, String[] enchants) {
         NBTTagCompound enhancedTag = new NBTTagCompound();
         enhancedTag.setInteger("enhanced", 1);
         if (output.getTagCompound() == null) {
@@ -61,8 +63,8 @@ public class ModUtils {
                 output.addEnchantment(enchantment, level);
             }
         }
-        GameRegistry.addShapelessRecipe(output, input, ModTweaks.enhancementCrystal);
-        GameRegistry.addShapelessRecipe(input, output);
+        GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_upgrade"), null, output, Ingredient.fromStacks(input), Ingredient.fromStacks(new ItemStack(ModTweaks.enhancementCrystal)));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_remove"), null, input, Ingredient.fromStacks(output));
     }
 
 }

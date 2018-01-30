@@ -4,7 +4,7 @@ buildscript {
         maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -21,6 +21,7 @@ compileJava {
 minecraft {
     version = "${forge_version}"
     runDir = "run"
+    jvmArgs = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
     mappings = "${mappings_version}"
 
     replace '@FINGERPRINT@', project.findProperty('signSHA1')
@@ -51,11 +52,11 @@ repositories {
 }
 
 dependencies {
-	compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.11.2:+"
-	deobfCompile "mcp.mobius.waila:Hwyla:1.8.22-B37_1.11"
-	deobfCompile "codechicken:CodeChickenLib:1.11.2-+:universal"
-  deobfCompile "morph.avaritia:Avaritia:1.11.2-+:universal"
+	deobfCompile "mezz.jei:jei_1.12.2:+"
+	deobfCompile "mcp.mobius.waila:Hwyla:+"
+	deobfCompile "codechicken:CodeChickenLib:1.12.2-+:universal"
+  deobfCompile "morph.avaritia:Avaritia:1.12-+:universal"
+  deobfCompile "vazkii.botania:Botania:+:universal"
 }
 
 processResources {

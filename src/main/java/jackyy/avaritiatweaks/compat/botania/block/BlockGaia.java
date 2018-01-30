@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -31,10 +30,10 @@ public class BlockGaia extends Block {
     }
 
     @Override @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
         if (ModConfig.compats.botaniaCompat) {
             if (ModConfig.compats.botania.gaiaBlock && Loader.isModLoaded("botania")) {
-                list.add(new ItemStack(item));
+                list.add(new ItemStack(this));
             }
         }
     }
