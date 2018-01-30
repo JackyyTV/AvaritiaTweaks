@@ -5,13 +5,10 @@ import jackyy.avaritiatweaks.proxy.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.IModGuiFactory;
 import net.minecraftforge.fml.client.config.GuiConfig;
-import net.minecraftforge.fml.client.config.IConfigElement;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class ConfigGuiFactory implements IModGuiFactory {
@@ -37,21 +34,13 @@ public class ConfigGuiFactory implements IModGuiFactory {
 
     public static class ConfigGui extends GuiConfig {
         public ConfigGui(GuiScreen parentScreen) {
-            super(parentScreen, getConfigElements(), AvaritiaTweaks.MODID, false,
-                    false, GuiConfig.getAbridgedConfigPath(CommonProxy.config.toString()));
+            super(parentScreen, new ArrayList<>(new ConfigElement(CommonProxy.config.getCategory("general")).getChildElements()),
+                    AvaritiaTweaks.MODID, false, false, GuiConfig.getAbridgedConfigPath(CommonProxy.config.toString()));
         }
-
         @Override
         public void onGuiClosed() {
             super.onGuiClosed();
             CommonProxy.config.save();
-        }
-
-        private static List<IConfigElement> getConfigElements() {
-            List<IConfigElement> list = new ArrayList<>();
-            Configuration cfg = CommonProxy.config;
-            list.add(new ConfigElement(cfg.getCategory("general")));
-            return list;
         }
     }
 
