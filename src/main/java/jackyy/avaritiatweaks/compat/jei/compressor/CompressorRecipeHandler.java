@@ -1,6 +1,6 @@
-package jackyy.avaritiatweaks.integrations.jei.compressor;
+package jackyy.avaritiatweaks.compat.jei.compressor;
 
-import jackyy.avaritiatweaks.integrations.jei.JEIIntegration;
+import jackyy.avaritiatweaks.compat.jei.JEICompat;
 import mezz.jei.api.recipe.IRecipeHandler;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.util.ErrorUtil;
@@ -22,7 +22,7 @@ public class CompressorRecipeHandler implements IRecipeHandler<CompressorRecipe>
 
     @Override
     public String getRecipeCategoryUid(CompressorRecipe recipe) {
-        return JEIIntegration.NEUTRONIUM_COMPRESSOR;
+        return JEICompat.NEUTRONIUM_COMPRESSOR;
     }
 
     @Override

@@ -2,21 +2,16 @@ package jackyy.avaritiatweaks.tweaks;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.util.TransformUtils;
-import jackyy.avaritiatweaks.block.BlockGaia;
+import jackyy.avaritiatweaks.compat.botania.BotaniaCompat;
 import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.item.ItemEnhancementCrystal;
+import jackyy.avaritiatweaks.util.ModUtils;
 import morph.avaritia.client.render.item.HaloRenderItem;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.init.Enchantments;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -26,12 +21,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModTweaks {
 
     public static ItemEnhancementCrystal enhancementCrystal = new ItemEnhancementCrystal();
-    public static BlockGaia gaiaBlock = new BlockGaia();
 
     public static void initItems() {
         GameRegistry.register(enhancementCrystal);
-        GameRegistry.register(gaiaBlock);
-        GameRegistry.register(new ItemBlock(gaiaBlock), gaiaBlock.getRegistryName());
     }
 
     @SideOnly(Side.CLIENT)
@@ -40,7 +32,6 @@ public class ModTweaks {
         ModelLoader.setCustomModelResourceLocation(enhancementCrystal, 0, location);
         IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM, (modelRegistry) -> modelRegistry.getObject(location));
         ModelRegistryHelper.register(location, wrapped);
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(gaiaBlock), 0, new ModelResourceLocation(gaiaBlock.getRegistryName(), "inventory"));
     }
 
     public static void initRecipes() {
@@ -58,72 +49,34 @@ public class ModTweaks {
                     "    N    ",
                     'N', ModItems.neutronium_ingot, 'C', ModItems.crystal_matrix_ingot, 'I', ModItems.infinity_catalyst
             );
-            addEnhancementArmorRecipe(new ItemStack(ModItems.infinity_helmet), new ItemStack(ModItems.infinity_helmet));
-            addEnhancementArmorRecipe(new ItemStack(ModItems.infinity_chestplate), new ItemStack(ModItems.infinity_chestplate));
-            addEnhancementArmorRecipe(new ItemStack(ModItems.infinity_pants), new ItemStack(ModItems.infinity_pants));
-            addEnhancementArmorRecipe(new ItemStack(ModItems.infinity_boots), new ItemStack(ModItems.infinity_boots));
-            addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_sword), new ItemStack(ModItems.infinity_sword), ModConfig.infinityTools.infinitySwordEnchantments);
-            addEnhancementToolsRecipe(getInfPick(new ItemStack(ModItems.infinity_pickaxe)), getInfPick(new ItemStack(ModItems.infinity_pickaxe)), ModConfig.infinityTools.infinityPickaxeEnchantments);
-            addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_axe), new ItemStack(ModItems.infinity_axe), ModConfig.infinityTools.infinityAxeEnchantments);
-            addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_shovel), new ItemStack(ModItems.infinity_shovel), ModConfig.infinityTools.infinityShovelEnchantments);
-            addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_bow), new ItemStack(ModItems.infinity_bow), ModConfig.infinityTools.infinityBowEnchantments);
-        }
-        if (ModConfig.integrations.botaniaIntegration) {
-            if (ModConfig.Integrations.botania.gaiaBlock && Loader.isModLoaded("Botania")) {
-                GameRegistry.addShapedRecipe(
-                        new ItemStack(gaiaBlock),
-                        "XXX", "XXX", "XXX",
-                        'X', getStackFromName("botania:manaResource", 1, 14)
-                );
-                GameRegistry.addShapelessRecipe(getStackFromName("botania:manaResource", 9, 14), new ItemStack(gaiaBlock));
-            }
+            ModUtils.addEnhancementArmorRecipe(new ItemStack(ModItems.infinity_helmet), new ItemStack(ModItems.infinity_helmet));
+            ModUtils.addEnhancementArmorRecipe(new ItemStack(ModItems.infinity_chestplate), new ItemStack(ModItems.infinity_chestplate));
+            ModUtils.addEnhancementArmorRecipe(new ItemStack(ModItems.infinity_pants), new ItemStack(ModItems.infinity_pants));
+            ModUtils.addEnhancementArmorRecipe(new ItemStack(ModItems.infinity_boots), new ItemStack(ModItems.infinity_boots));
+            ModUtils.addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_sword), new ItemStack(ModItems.infinity_sword), ModConfig.infinityTools.infinitySwordEnchantments);
+            ModUtils.addEnhancementToolsRecipe(ModUtils.getInfPick(new ItemStack(ModItems.infinity_pickaxe)), ModUtils.getInfPick(new ItemStack(ModItems.infinity_pickaxe)), ModConfig.infinityTools.infinityPickaxeEnchantments);
+            ModUtils.addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_axe), new ItemStack(ModItems.infinity_axe), ModConfig.infinityTools.infinityAxeEnchantments);
+            ModUtils.addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_shovel), new ItemStack(ModItems.infinity_shovel), ModConfig.infinityTools.infinityShovelEnchantments);
+            ModUtils.addEnhancementToolsRecipe(new ItemStack(ModItems.infinity_bow), new ItemStack(ModItems.infinity_bow), ModConfig.infinityTools.infinityBowEnchantments);
         }
     }
 
-    private static ItemStack getStackFromName(String name, int amount, int meta) {
-        Item item = Item.REGISTRY.getObject(new ResourceLocation(name));
-        ItemStack stack = null;
-        if (item != null) {
-            stack = new ItemStack(item, amount, meta);
+    public static void preInitIntegrations() {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("Botania")) {
+            BotaniaCompat.preInit();
+            BotaniaCompat.initRecipes();
         }
-        return stack;
     }
 
-    private static ItemStack getInfPick(ItemStack stack) {
-        stack.addEnchantment(Enchantments.FORTUNE, 10);
-        return stack;
+    public static void initIntegrations() {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("Botania")) {
+            BotaniaCompat.init();
+        }
     }
 
-    private static void addEnhancementArmorRecipe(ItemStack input, ItemStack output) {
-        NBTTagCompound enhancedTag = new NBTTagCompound();
-        enhancedTag.setInteger("enhanced", 1);
-        if (output.getTagCompound() == null) {
-            output.setTagCompound(enhancedTag);
-        } else {
-            output.getTagCompound().setInteger("enhanced", 1);
-        }
-        GameRegistry.addShapelessRecipe(output, input, enhancementCrystal);
-        GameRegistry.addShapelessRecipe(input, output);
-    }
-
-    private static void addEnhancementToolsRecipe(ItemStack input, ItemStack output, String[] enchants) {
-        NBTTagCompound enhancedTag = new NBTTagCompound();
-        enhancedTag.setInteger("enhanced", 1);
-        if (output.getTagCompound() == null) {
-            output.setTagCompound(enhancedTag);
-        } else {
-            output.getTagCompound().setInteger("enhanced", 1);
-        }
-        for (String enchant : enchants) {
-            String[] enchantmentAndLevel = enchant.split("@", 2);
-            Enchantment enchantment = Enchantment.getEnchantmentByLocation(enchantmentAndLevel[0]);
-            int level = Integer.parseInt(enchantmentAndLevel[1]);
-            if (enchantment != null) {
-                output.addEnchantment(enchantment, level);
-            }
-        }
-        GameRegistry.addShapelessRecipe(output, input, enhancementCrystal);
-        GameRegistry.addShapelessRecipe(input, output);
+    @SideOnly(Side.CLIENT)
+    public static void initIntegrationsClient() {
+        BotaniaCompat.initModels();
     }
 
 }

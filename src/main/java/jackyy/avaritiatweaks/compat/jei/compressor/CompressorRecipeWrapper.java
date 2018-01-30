@@ -1,6 +1,6 @@
-package jackyy.avaritiatweaks.integrations.jei.compressor;
+package jackyy.avaritiatweaks.compat.jei.compressor;
 
-import jackyy.avaritiatweaks.integrations.jei.JEIIntegration;
+import jackyy.avaritiatweaks.compat.jei.JEICompat;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.ingredients.IIngredients;
@@ -19,8 +19,8 @@ public class CompressorRecipeWrapper extends BlankRecipeWrapper {
 
     public CompressorRecipeWrapper(CompressorRecipe recipe) {
         this.recipe = recipe;
-        IGuiHelper helper = JEIIntegration.jeiHelpers.getGuiHelper();
-        singularity = helper.createAnimatedDrawable(JEIIntegration.static_singularity, Math.max(recipe.getCost() / 16, 1), IDrawableAnimated.StartDirection.BOTTOM, false);
+        IGuiHelper helper = JEICompat.jeiHelpers.getGuiHelper();
+        singularity = helper.createAnimatedDrawable(JEICompat.static_singularity, Math.max(recipe.getCost() / 16, 1), IDrawableAnimated.StartDirection.BOTTOM, false);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CompressorRecipeWrapper extends BlankRecipeWrapper {
     }
 
     private List<List<ItemStack>> getRecipeInputs(CompressorRecipe recipe) {
-        return JEIIntegration.jeiHelpers.getStackHelper().expandRecipeItemStackInputs(recipe.getInputs());
+        return JEICompat.jeiHelpers.getStackHelper().expandRecipeItemStackInputs(recipe.getInputs());
     }
 
 }

@@ -22,10 +22,12 @@ public class CommonProxy {
         PacketHandler.registerMessages(AvaritiaTweaks.MODID);
         ModTweaks.initItems();
         ModTweaks.initRecipes();
+        ModTweaks.preInitIntegrations();
         MinecraftForge.EVENT_BUS.register(new ModEventsHandler());
     }
 
     public void init(FMLInitializationEvent event) {
+        ModTweaks.initIntegrations();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

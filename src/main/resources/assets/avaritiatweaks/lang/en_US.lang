@@ -20,7 +20,14 @@ tooltips.avaritiatweaks.noclip.disabled=No Clip Mode: §c§lDisabled§r
 msg.avaritiatweaks.noclip.enabled=No Clip Mode is now §aEnabled§r
 msg.avaritiatweaks.noclip.disabled=No Clip Mode is now §cDisabled§r
 
-#JEI Descriptions
+#JEI Integration
 desc.avaritiatweaks.neutron_pile=Produced from Neutron Collector.
 desc.avaritiatweaks.neutron_collector=The Neutron Collector collects a Pile of Neutrons every 7111 ticks, which is about 6 minutes in real life.
 desc.avaritiatweaks.enhancement_crystal=This crystal can be crafted with Infinity Armor / Tools to give them special capabilities, like Enchantments, Potion Effects, etc.
+
+#Botania Integration
+tile.botania.flower.asgardandelion.lore=Watered with Vazkii's tears :c
+botania.lexicon.asgardandelion.0=Rumors abound about some kind of godlike flower that can produce a never-ending torrent of mana. If such a mythical flower were to exist, it would probably require wealth and resources beyond mortal reckoning. &oStill not a SAO reference.&r
+tile.botania.flower.soarleander.lore=Just hook it up to my veeeeins!
+botania.lexicon.soarleander.0=If you have a surfeit of chicken or chicken by-products, look no further! The Soarleander will devour any and all things chicken in the vicinity (chickens themselves included) while remaining totally disinterested in everything else.
+botania.lexicon.soarleander.1=&oAny random chests are an unintended side-effect.&r

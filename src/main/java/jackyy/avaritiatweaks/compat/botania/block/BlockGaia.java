@@ -1,4 +1,4 @@
-package jackyy.avaritiatweaks.block;
+package jackyy.avaritiatweaks.compat.botania.block;
 
 import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.config.ModConfig;
@@ -33,8 +33,8 @@ public class BlockGaia extends Block {
 
     @Override @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
-        if (ModConfig.integrations.botaniaIntegration) {
-            if (ModConfig.Integrations.botania.gaiaBlock && Loader.isModLoaded("Botania")) {
+        if (ModConfig.compats.botaniaCompat) {
+            if (ModConfig.Compats.botania.gaiaBlock && Loader.isModLoaded("Botania")) {
                 list.add(new ItemStack(item));
             }
         }

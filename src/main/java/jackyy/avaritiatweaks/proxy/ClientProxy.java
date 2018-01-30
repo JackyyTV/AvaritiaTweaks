@@ -12,6 +12,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
         ModTweaks.initModels();
+        ModTweaks.initIntegrationsClient();
     }
 
     @Override

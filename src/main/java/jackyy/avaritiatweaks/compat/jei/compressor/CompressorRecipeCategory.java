@@ -1,6 +1,6 @@
-package jackyy.avaritiatweaks.integrations.jei.compressor;
+package jackyy.avaritiatweaks.compat.jei.compressor;
 
-import jackyy.avaritiatweaks.integrations.jei.JEIIntegration;
+import jackyy.avaritiatweaks.compat.jei.JEICompat;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -21,7 +21,7 @@ public class CompressorRecipeCategory extends BlankRecipeCategory<CompressorReci
 
     @Override
     public String getUid() {
-        return JEIIntegration.NEUTRONIUM_COMPRESSOR;
+        return JEICompat.NEUTRONIUM_COMPRESSOR;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CompressorRecipeCategory extends BlankRecipeCategory<CompressorReci
 
     @Override
     public IDrawable getBackground() {
-        return JEIIntegration.neutronium_compressor;
+        return JEICompat.neutronium_compressor;
     }
 
     @Override

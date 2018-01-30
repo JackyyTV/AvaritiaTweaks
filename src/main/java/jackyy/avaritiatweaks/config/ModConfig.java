@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ModConfig {
 
     public static Tweaks tweaks = new Tweaks();
-    public static Integrations integrations = new Integrations();
+    public static Compats compats = new Compats();
     public static InfinityArmor infinityArmor = new InfinityArmor();
     public static InfinityTools infinityTools = new InfinityTools();
 
@@ -28,9 +28,9 @@ public class ModConfig {
         public boolean enableEnhancementCrystal = true;
     }
 
-    public static class Integrations {
-        @Config.Comment("If true, enables JEI integration")
-        public boolean jeiIntegration = true;
+    public static class Compats {
+        @Config.Comment("If true, enables JEI compat")
+        public boolean jeiCompat = true;
         public static JEI jei = new JEI();
         public static class JEI {
             @Config.Comment("If true, enables Neutronium Compressor recipes integration on JEI")
@@ -38,12 +38,16 @@ public class ModConfig {
             @Config.Comment("If true, provides descriptions for some items on JEI")
             public boolean descriptions = true;
         }
-        @Config.Comment("If true, enables Botania integration")
-        public boolean botaniaIntegration = true;
+        @Config.Comment("If true, enables Botania compat")
+        public boolean botaniaCompat = true;
         public static Botania botania = new Botania();
         public static class Botania {
             @Config.Comment("If true, enables Gaia Block")
             public boolean gaiaBlock = true;
+            @Config.Comment("If true, enables Asgardandelion")
+            public boolean asgardandelion = true;
+            @Config.Comment("If true, enables Soarleander")
+            public boolean soarleander = true;
         }
     }
 

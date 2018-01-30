@@ -1,8 +1,8 @@
-package jackyy.avaritiatweaks.integrations.jei;
+package jackyy.avaritiatweaks.compat.jei;
 
+import jackyy.avaritiatweaks.compat.jei.compressor.CompressorRecipeCategory;
+import jackyy.avaritiatweaks.compat.jei.compressor.CompressorRecipeHandler;
 import jackyy.avaritiatweaks.config.ModConfig;
-import jackyy.avaritiatweaks.integrations.jei.compressor.CompressorRecipeCategory;
-import jackyy.avaritiatweaks.integrations.jei.compressor.CompressorRecipeHandler;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
 import mezz.jei.api.*;
 import mezz.jei.api.gui.IDrawableStatic;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 @JEIPlugin
-public class JEIIntegration implements IModPlugin {
+public class JEICompat implements IModPlugin {
 
     public static final String NEUTRONIUM_COMPRESSOR = "Avatitia.Compressor";
     public static IJeiHelpers jeiHelpers;
@@ -32,8 +32,8 @@ public class JEIIntegration implements IModPlugin {
 
     @Override
     public void register(IModRegistry registry) {
-        if (ModConfig.integrations.jeiIntegration) {
-            if (ModConfig.Integrations.jei.neutroniumCompressor) {
+        if (ModConfig.compats.jeiCompat) {
+            if (ModConfig.Compats.jei.neutroniumCompressor) {
                 jeiHelpers = registry.getJeiHelpers();
                 IGuiHelper helper = jeiHelpers.getGuiHelper();
                 ResourceLocation location = new ResourceLocation("avaritia:textures/gui/compressor.png");
@@ -46,7 +46,7 @@ public class JEIIntegration implements IModPlugin {
                 registry.addRecipeCategoryCraftingItem(new ItemStack(ModBlocks.neutronium_compressor), NEUTRONIUM_COMPRESSOR);
                 registry.addRecipes(CompressorManager.getRecipes());
             }
-            if (ModConfig.Integrations.jei.descriptions) {
+            if (ModConfig.Compats.jei.descriptions) {
                 registry.addDescription(ModItems.neutron_pile, "desc.avaritiatweaks.neutron_pile");
                 registry.addDescription(new ItemStack(ModBlocks.neutron_collector), "desc.avaritiatweaks.neutron_collector");
                 registry.addDescription(new ItemStack(ModTweaks.enhancementCrystal), "desc.avaritiatweaks.enhancement_crystal");
