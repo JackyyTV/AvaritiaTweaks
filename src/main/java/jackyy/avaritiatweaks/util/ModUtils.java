@@ -8,11 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
-
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.reflect.Field;
 
 public class ModUtils {
 
@@ -26,7 +21,7 @@ public class ModUtils {
     }
 
     public static ItemStack getFlower(String type) {
-        ItemStack flower = getStackFromName("botania:specialFlower", 1, 0);
+        ItemStack flower = getStackFromName("botania:specialflower", 1, 0);
         NBTTagCompound tag = new NBTTagCompound();
         tag.setString("type", type);
         flower.setTagCompound(tag);
@@ -36,15 +31,6 @@ public class ModUtils {
     public static ItemStack getInfPick(ItemStack stack) {
         stack.addEnchantment(Enchantments.FORTUNE, 10);
         return stack;
-    }
-
-    public static MethodHandle findFieldGetter(Class<?> clazz, String... fieldNames) {
-        final Field field = ReflectionHelper.findField(clazz, fieldNames);
-        try {
-            return MethodHandles.lookup().unreflectGetter(field);
-        } catch (IllegalAccessException e) {
-            throw new ReflectionHelper.UnableToAccessFieldException(fieldNames, e);
-        }
     }
 
     public static void addEnhancementArmorRecipe(ItemStack input, ItemStack output) {
