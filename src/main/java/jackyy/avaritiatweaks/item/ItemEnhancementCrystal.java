@@ -35,7 +35,7 @@ public class ItemEnhancementCrystal extends Item implements IHaloRenderItem {
         tooltip.add(TextFormatting.DARK_GRAY + "" + TextFormatting.ITALIC + I18n.format("tooltips.avaritiatweaks.enhancement_crystal"));
     }
 
-    @Override @SideOnly(Side.CLIENT)
+    @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
         if (isInCreativeTab(tab)) {
             if (ModConfig.tweaks.enableEnhancementCrystal) {

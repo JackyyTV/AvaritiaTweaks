@@ -38,30 +38,26 @@ public class BotaniaCompat {
     public static void initBlocks(RegistryEvent.Register<Block> e) {
         e.getRegistry().register(gaiaBlock);
         if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
-            preInit();
-        }
-    }
-
-    public static void preInit() {
-        if (ModConfig.compats.botania.asgardandelion) {
-            BotaniaAPI.registerSubTile("asgardandelion", SubTileAsgardandelion.class);
-            BotaniaAPI.registerSubTileSignature(SubTileAsgardandelion.class, new BasicSignature("asgardandelion") {
-                @Override
-                public String getUnlocalizedLoreTextForStack(ItemStack stack) {
-                    return "tile.botania.flower.asgardandelion.lore";
-                }
-            });
-            BotaniaAPI.addSubTileToCreativeMenu("asgardandelion");
-        }
-        if (ModConfig.compats.botania.soarleander) {
-            BotaniaAPI.registerSubTile("soarleander", SubTileSoarleander.class);
-            BotaniaAPI.registerSubTileSignature(SubTileSoarleander.class, new BasicSignature("soarleander") {
-                @Override
-                public String getUnlocalizedLoreTextForStack(ItemStack stack) {
-                    return "tile.botania.flower.soarleander.lore";
-                }
-            });
-            BotaniaAPI.addSubTileToCreativeMenu("soarleander");
+            if (ModConfig.compats.botania.asgardandelion) {
+                BotaniaAPI.registerSubTile("asgardandelion", SubTileAsgardandelion.class);
+                BotaniaAPI.registerSubTileSignature(SubTileAsgardandelion.class, new BasicSignature("asgardandelion") {
+                    @Override
+                    public String getUnlocalizedLoreTextForStack(ItemStack stack) {
+                        return "tile.botania.flower.asgardandelion.lore";
+                    }
+                });
+                BotaniaAPI.addSubTileToCreativeMenu("asgardandelion");
+            }
+            if (ModConfig.compats.botania.soarleander) {
+                BotaniaAPI.registerSubTile("soarleander", SubTileSoarleander.class);
+                BotaniaAPI.registerSubTileSignature(SubTileSoarleander.class, new BasicSignature("soarleander") {
+                    @Override
+                    public String getUnlocalizedLoreTextForStack(ItemStack stack) {
+                        return "tile.botania.flower.soarleander.lore";
+                    }
+                });
+                BotaniaAPI.addSubTileToCreativeMenu("soarleander");
+            }
         }
     }
 

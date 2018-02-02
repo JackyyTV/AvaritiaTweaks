@@ -13,8 +13,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGaia extends Block {
 
@@ -29,7 +27,7 @@ public class BlockGaia extends Block {
         setCreativeTab(AvaritiaTweaks.TAB);
     }
 
-    @Override @SideOnly(Side.CLIENT)
+    @Override
     public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
         if (ModConfig.compats.botaniaCompat) {
             if (ModConfig.compats.botania.gaiaBlock && Loader.isModLoaded("botania")) {
