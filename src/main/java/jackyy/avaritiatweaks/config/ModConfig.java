@@ -10,10 +10,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Config(modid = AvaritiaTweaks.MODID, name = "AvaritiaTweaks", category = AvaritiaTweaks.MODID)
 public class ModConfig {
 
-    public static final Tweaks tweaks = new Tweaks();
-    public static final Compats compats = new Compats();
-    public static final InfinityArmor infinityArmor = new InfinityArmor();
-    public static final InfinityTools infinityTools = new InfinityTools();
+    public static Tweaks tweaks = new Tweaks();
+    public static Compats compats = new Compats();
+    public static InfinityArmor infinityArmor = new InfinityArmor();
+    public static InfinityTools infinityTools = new InfinityTools();
 
     public static class Tweaks {
         @Config.Comment("If true, enables unbreakable blocks mining with the World Breaker")
@@ -31,14 +31,14 @@ public class ModConfig {
     public static class Compats {
         @Config.Comment("If true, enables JEI compat")
         public boolean jeiCompat = true;
-        public final JEI jei = new JEI();
+        public JEI jei = new JEI();
         public static class JEI {
             @Config.Comment("If true, provides descriptions for some items on JEI")
             public boolean descriptions = true;
         }
         @Config.Comment("If true, enables Botania compat")
         public boolean botaniaCompat = true;
-        public final Botania botania = new Botania();
+        public Botania botania = new Botania();
         public static class Botania {
             @Config.Comment("If true, enables Gaia Block")
             public boolean gaiaBlock = true;

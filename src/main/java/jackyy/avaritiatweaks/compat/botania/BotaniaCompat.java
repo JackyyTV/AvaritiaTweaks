@@ -6,9 +6,6 @@ import jackyy.avaritiatweaks.compat.botania.subtile.SubTileAsgardandelion;
 import jackyy.avaritiatweaks.compat.botania.subtile.SubTileSoarleander;
 import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.util.ModUtils;
-import morph.avaritia.init.ModItems;
-import morph.avaritia.recipe.extreme.ExtremeShapedRecipe;
-import morph.avaritia.recipe.extreme.IExtremeRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
@@ -18,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -99,31 +95,6 @@ public class BotaniaCompat {
         }
         if (ModConfig.compats.botania.soarleander) {
             BotaniaAPIClient.registerSubtileModel(SubTileSoarleander.class, new ModelResourceLocation(AvaritiaTweaks.MODID + ":soarleander"));
-        }
-    }
-
-    public static void initExtremeRecipes(RegistryEvent.Register<IExtremeRecipe> e) {
-        if (ModConfig.compats.botania.asgardandelion) {
-            e.getRegistry().register(
-                    new ExtremeShapedRecipe(
-                            asgardandelion,
-                            CraftingHelper.parseShaped(
-                                    "   III   ",
-                                    "  IIIII  ",
-                                    "  IIXII  ",
-                                    "  IIIII  ",
-                                    "   III   ",
-                                    " nn N nn ",
-                                    "nnnnNnnnn",
-                                    " nn N nn ",
-                                    "    N    ",
-                                    'I', new ItemStack(ModItems.resource, 1, 6),
-                                    'X', new ItemStack(ModItems.resource, 1, 5),
-                                    'N', new ItemStack(ModItems.resource, 1, 4),
-                                    'n', new ItemStack(ModItems.resource, 1, 3)
-                            )
-                    ).setRegistryName(new ResourceLocation(AvaritiaTweaks.MODID, "asgardandelion"))
-            );
         }
     }
 

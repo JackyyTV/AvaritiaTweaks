@@ -4,7 +4,6 @@ import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.packet.PacketHandler;
 import jackyy.avaritiatweaks.tweaks.ModEventsHandler;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
-import morph.avaritia.recipe.extreme.IExtremeRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
@@ -31,11 +30,6 @@ public class CommonProxy {
     @SubscribeEvent
     public void onBlockRegistry(RegistryEvent.Register<Block> e) {
         ModTweaks.initBlocks(e);
-    }
-
-    @SubscribeEvent
-    public void onExtremeRecipeRegistry(RegistryEvent.Register<IExtremeRecipe> e) {
-        ModTweaks.initExtremeRecipes(e);
     }
 
     @SubscribeEvent

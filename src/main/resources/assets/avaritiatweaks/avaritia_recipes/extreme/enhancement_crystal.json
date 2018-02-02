@@ -1,0 +1,39 @@
+{
+  "type": "avaritia:shaped",
+  "conditions": [
+    {"type": "avaritiatweaks:enable_enhancement_crystal", "value": true}
+  ],
+  "result": {
+    "item": "avaritiatweaks:enhancement_crystal",
+    "data": 0,
+    "count": 1
+  },
+  "pattern": [
+    "    N    ",
+    "   NCN   ",
+    "  NCCCN  ",
+    "  NICIN  ",
+    "  NCICN  ",
+    "  NICIN  ",
+    "  NCCCN  ",
+    "   NCN   ",
+    "    N    "
+  ],
+  "key": {
+    "N": {
+      "type": "minecraft:item",
+      "item": "avaritia:resource",
+      "data": 4
+    },
+    "C": {
+      "type": "minecraft:item",
+      "item": "avaritia:resource",
+      "data": 1
+    },
+    "I": {
+      "type": "minecraft:item",
+      "item": "avaritia:resource",
+      "data": 5
+    }
+  }
+}

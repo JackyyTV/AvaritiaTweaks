@@ -1,0 +1,6 @@
+{
+  "conditions": {
+    "enable_enhancement_crystal": "jackyy.avaritiatweaks.crafting.EnhancementCrystalConditionFactory",
+    "enable_asgardandelion": "jackyy.avaritiatweaks.crafting.AsgardandelionConditionFactory"
+  }
+}

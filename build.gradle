@@ -21,7 +21,6 @@ compileJava {
 minecraft {
     version = "${forge_version}"
     runDir = "run"
-    jvmArgs = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
     mappings = "${mappings_version}"
 
     replace '@FINGERPRINT@', project.findProperty('signSHA1')

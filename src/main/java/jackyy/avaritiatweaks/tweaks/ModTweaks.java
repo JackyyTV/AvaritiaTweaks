@@ -2,24 +2,19 @@ package jackyy.avaritiatweaks.tweaks;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.util.TransformUtils;
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.compat.botania.BotaniaCompat;
 import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.item.ItemEnhancementCrystal;
 import jackyy.avaritiatweaks.util.ModUtils;
 import morph.avaritia.client.render.item.HaloRenderItem;
 import morph.avaritia.init.ModItems;
-import morph.avaritia.recipe.extreme.ExtremeShapedRecipe;
-import morph.avaritia.recipe.extreme.IExtremeRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,33 +39,6 @@ public class ModTweaks {
         ModelLoader.setCustomModelResourceLocation(enhancementCrystal, 0, location);
         IBakedModel wrapped = new HaloRenderItem(TransformUtils.DEFAULT_ITEM, (modelRegistry) -> modelRegistry.getObject(location));
         ModelRegistryHelper.register(location, wrapped);
-    }
-
-    public static void initExtremeRecipes(RegistryEvent.Register<IExtremeRecipe> e) {
-        if (ModConfig.tweaks.enableEnhancementCrystal) {
-            e.getRegistry().register(
-                    new ExtremeShapedRecipe(
-                            new ItemStack(enhancementCrystal),
-                            CraftingHelper.parseShaped(
-                                    "    N    ",
-                                    "   NCN   ",
-                                    "  NCCCN  ",
-                                    "  NICIN  ",
-                                    "  NCICN  ",
-                                    "  NICIN  ",
-                                    "  NCCCN  ",
-                                    "   NCN   ",
-                                    "    N    ",
-                                    'N', ModItems.neutronium_ingot,
-                                    'C', ModItems.crystal_matrix_ingot,
-                                    'I', ModItems.infinity_catalyst
-                            )
-                    ).setRegistryName(new ResourceLocation(AvaritiaTweaks.MODID, "enhancement_crystal"))
-            );
-        }
-        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
-            BotaniaCompat.initExtremeRecipes(e);
-        }
     }
 
     public static void initRecipes(RegistryEvent.Register<IRecipe> e) {

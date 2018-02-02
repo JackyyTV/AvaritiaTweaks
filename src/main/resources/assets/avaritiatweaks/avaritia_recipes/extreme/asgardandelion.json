@@ -1,0 +1,46 @@
+{
+  "type": "avaritia:shaped",
+  "conditions": [
+    {"type": "forge:mod_loaded", "modid": "botania"},
+    {"type": "avaritiatweaks:enable_asgardandelion", "value": true}
+  ],
+  "result": {
+    "item": "botania:specialflower",
+    "data": 0,
+    "count": 1,
+    "nbt": {"type": "asgardandelion"}
+  },
+  "pattern": [
+    "   III   ",
+    "  IIIII  ",
+    "  IIXII  ",
+    "  IIIII  ",
+    "   III   ",
+    " nn N nn ",
+    "nnnnNnnnn",
+    " nn N nn ",
+    "    N    "
+  ],
+  "key": {
+    "I": {
+      "type": "minecraft:item",
+      "item": "avaritia:resource",
+      "data": 6
+    },
+    "X": {
+      "type": "minecraft:item",
+      "item": "avaritia:resource",
+      "data": 5
+    },
+    "N": {
+      "type": "minecraft:item",
+      "item": "avaritia:resource",
+      "data": 4
+    },
+    "n": {
+      "type": "minecraft:item",
+      "item": "avaritia:resource",
+      "data": 3
+    }
+  }
+}
