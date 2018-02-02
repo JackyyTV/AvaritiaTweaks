@@ -67,7 +67,9 @@ public class ModTweaks {
 
     @SideOnly(Side.CLIENT)
     public static void initIntegrationsClient() {
-        BotaniaCompat.initModels();
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
+            BotaniaCompat.initModels();
+        }
     }
 
 }
