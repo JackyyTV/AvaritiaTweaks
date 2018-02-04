@@ -156,7 +156,7 @@ public class BotaniaCompat {
                     "IIIIIIIII",
                     "IIIIIIIII",
                     "IIIIIIIII",
-                    'I', ModUtils.getStackFromName("botania:tinyPotato", 1, 0),
+                    'I', ModUtils.getStackFromName("botania:tinypotato", 1, 0),
                     'X', new ItemStack(ModItems.resource, 1, 5),
                     'S', new ItemStack(Items.DIAMOND)
             );
