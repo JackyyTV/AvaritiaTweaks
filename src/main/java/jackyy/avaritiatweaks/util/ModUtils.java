@@ -3,10 +3,12 @@ package jackyy.avaritiatweaks.util;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
@@ -23,6 +25,14 @@ public class ModUtils {
             stack = new ItemStack(item, amount, meta);
         }
         return stack;
+    }
+
+    public static SoundEvent getSoundFromName(String name) {
+        SoundEvent sound = SoundEvent.REGISTRY.getObject(new ResourceLocation(name));
+        if (sound != null) {
+            return sound;
+        }
+        return SoundEvents.BLOCK_ANVIL_PLACE;
     }
 
     public static ItemStack getFlower(String type) {

@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "facing=north": { "model": "avaritiatweaks:infinitato" },
+    "facing=south": { "model": "avaritiatweaks:infinitato", "y": 180 },
+    "facing=west": { "model": "avaritiatweaks:infinitato", "y": 270 },
+    "facing=east": { "model": "avaritiatweaks:infinitato", "y": 90 }
+  }
+}
