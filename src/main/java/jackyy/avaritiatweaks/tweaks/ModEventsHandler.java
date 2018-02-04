@@ -156,8 +156,10 @@ public class ModEventsHandler {
 
     @SubscribeEvent @SideOnly(Side.CLIENT)
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (Keys.NOCLIP.isPressed()) {
-            PacketHandler.INSTANCE.sendToServer(new PacketToggleNoClip());
+        if (ModConfig.infinityArmor.infinityArmorNoClip) {
+            if (Keys.NOCLIP.isPressed()) {
+                PacketHandler.INSTANCE.sendToServer(new PacketToggleNoClip());
+            }
         }
     }
 

@@ -12,7 +12,7 @@ import org.lwjgl.input.Keyboard;
 @SideOnly(Side.CLIENT)
 public class Keys {
 
-    public static final KeyBinding NOCLIP = new KeyBinding("key.infinity_armor.noclip", new IKeyConflictContext() {
+    public static final KeyBinding NOCLIP = new KeyBinding(ModConfig.infinityArmor.infinityArmorNoClip ? "key.infinity_armor.noclip" : "key.infinity_armor.noclip.disabled", new IKeyConflictContext() {
         @Override
         public boolean isActive() {
             return KeyConflictContext.IN_GAME.isActive();
@@ -24,9 +24,7 @@ public class Keys {
     }, Keyboard.KEY_APOSTROPHE, "key.categories.avaritiatweaks");
 
     public static void init() {
-        if (ModConfig.infinityArmor.infinityArmorNoClip) {
-            ClientRegistry.registerKeyBinding(NOCLIP);
-        }
+        ClientRegistry.registerKeyBinding(NOCLIP);
     }
 
 }

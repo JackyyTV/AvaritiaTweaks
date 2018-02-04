@@ -46,6 +46,8 @@ public class ModConfig {
             public boolean asgardandelion = true;
             @Config.Comment("If true, enables Soarleander")
             public boolean soarleander = true;
+            @Config.Comment("If true, enables Infinitato")
+            public boolean infinitato = true;
         }
     }
 
