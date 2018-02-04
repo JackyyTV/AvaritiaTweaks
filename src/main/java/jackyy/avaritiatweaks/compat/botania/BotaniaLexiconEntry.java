@@ -19,7 +19,7 @@ public class BotaniaLexiconEntry extends LexiconEntry implements IAddonEntry {
 
     @Override
     public String getUnlocalizedName() {
-        return "avaritia.lexicon." + super.getUnlocalizedName();
+        return "botania.lexicon." + super.getUnlocalizedName();
     }
 
 }

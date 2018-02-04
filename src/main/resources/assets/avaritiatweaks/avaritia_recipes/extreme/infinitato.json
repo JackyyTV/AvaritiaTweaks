@@ -1,0 +1,40 @@
+{
+  "type": "avaritia:shaped",
+  "conditions": [
+    {"type": "forge:mod_loaded", "modid": "botania"},
+    {"type": "avaritiatweaks:enable_infinitato", "value": true}
+  ],
+  "result": {
+    "item": "avaritiatweaks:infinitato",
+    "data": 0,
+    "count": 1
+  },
+  "pattern": [
+    "IIIIIIIII",
+    "IIIIIIIII",
+    "IIISISIII",
+    "IIIIIIIII",
+    "IISIXISII",
+    "IIISSSIII",
+    "IIIIIIIII",
+    "IIIIIIIII",
+    "IIIIIIIII"
+  ],
+  "key": {
+    "I": {
+      "type": "minecraft:item",
+      "item": "botania:tinypotato",
+      "data": 0
+    },
+    "X": {
+      "type": "minecraft:item",
+      "item": "avaritia:resource",
+      "data": 5
+    },
+    "S": {
+      "type": "minecraft:item",
+      "item": "minecraft:diamond",
+      "data": 0
+    }
+  }
+}

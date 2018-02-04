@@ -26,11 +26,15 @@ public class ModTweaks {
 
     public static void initItems(RegistryEvent.Register<Item> e) {
         e.getRegistry().register(enhancementCrystal);
-        BotaniaCompat.initItems(e);
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
+            BotaniaCompat.initItems(e);
+        }
     }
 
     public static void initBlocks(RegistryEvent.Register<Block> e) {
-        BotaniaCompat.initBlocks(e);
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
+            BotaniaCompat.initBlocks(e);
+        }
     }
 
     @SideOnly(Side.CLIENT)
