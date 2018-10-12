@@ -88,7 +88,7 @@ public class ModEventsHandler {
                 player.capabilities.isFlying = true;
                 player.noClip = true;
             }
-            if (!AvaritiaEventHandler.isInfinite(player) && !noClip) {
+            if (!AvaritiaEventHandler.isInfinite(player) && !noClip && !player.isSpectator()) {
                 player.noClip = false;
             }
             if (noClip && !player.capabilities.isFlying) {
