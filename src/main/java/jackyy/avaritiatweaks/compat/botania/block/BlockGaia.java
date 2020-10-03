@@ -19,7 +19,7 @@ public class BlockGaia extends Block {
     public BlockGaia() {
         super(Material.IRON);
         setRegistryName("gaia_block");
-        setUnlocalizedName(AvaritiaTweaks.MODID + ".gaia_block");
+        setTranslationKey(AvaritiaTweaks.MODID + ".gaia_block");
         setSoundType(SoundType.METAL);
         setHarvestLevel("pickaxe", 3);
         setHardness(50.0F);

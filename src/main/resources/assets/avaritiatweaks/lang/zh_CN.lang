@@ -16,6 +16,7 @@ tile.avaritiatweaks.gaia_block.name=盖亚块
 tooltips.avaritiatweaks.enhancement_crystal=无尽或许还不够贪婪
 tooltips.avaritiatweaks.noclip.enabled=观察者模式：§a§l启用§r
 tooltips.avaritiatweaks.noclip.disabled=观察者模式：§c§l禁用§r
+tooltips.avaritiatweaks.infinite=无限
 
 #Messages
 msg.avaritiatweaks.noclip.enabled=观察者模式已经§a启用§r

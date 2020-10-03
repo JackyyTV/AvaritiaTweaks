@@ -9,6 +9,7 @@ import jackyy.avaritiatweaks.compat.botania.subtile.SubTileSoarleander;
 import jackyy.avaritiatweaks.compat.botania.tile.TileInfinitato;
 import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.util.ModUtils;
+import jackyy.gunpowderlib.helper.ObjectHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
@@ -66,7 +67,7 @@ public class BotaniaCompat {
         }
         if (ModConfig.compats.botania.infinitato) {
             e.getRegistry().register(infinitato);
-            GameRegistry.registerTileEntity(TileInfinitato.class, "Avaritia_Infinitato");
+            GameRegistry.registerTileEntity(TileInfinitato.class, new ResourceLocation(AvaritiaTweaks.MODID, "infinitato_tile"));
         }
     }
 
@@ -116,9 +117,9 @@ public class BotaniaCompat {
             GameRegistry.addShapedRecipe(
                     new ResourceLocation(AvaritiaTweaks.MODID, "gaia_ingots_to_block"), null, new ItemStack(gaiaBlock),
                     "XXX", "XXX", "XXX",
-                    'X', ModUtils.getStackFromName("botania:manaresource", 1, 14)
+                    'X', ObjectHelper.getItemStackByName("botania:manaresource", 1, 14)
             );
-            GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, "gaia_block_to_ingots"), null, ModUtils.getStackFromName("botania:manaresource", 9, 14), Ingredient.fromStacks(new ItemStack(gaiaBlock)));
+            GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, "gaia_block_to_ingots"), null, ObjectHelper.getItemStackByName("botania:manaresource", 9, 14), Ingredient.fromStacks(new ItemStack(gaiaBlock)));
         }
         if (ModConfig.compats.botania.soarleander) {
             BotaniaAPI.registerRuneAltarRecipe(

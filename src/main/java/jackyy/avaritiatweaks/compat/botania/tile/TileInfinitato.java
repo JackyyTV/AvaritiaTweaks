@@ -1,6 +1,6 @@
 package jackyy.avaritiatweaks.compat.botania.tile;
 
-import jackyy.avaritiatweaks.util.ModUtils;
+import jackyy.gunpowderlib.helper.ObjectHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -26,7 +26,7 @@ public class TileInfinitato extends TileTinyPotato {
         jump();
         if(name.equalsIgnoreCase("shia labeouf") && !world.isRemote && nextDoIt == 0) {
             nextDoIt = 40;
-            world.playSound(player, player.getPosition(), ModUtils.getSoundFromName("botania:doit"),
+            world.playSound(player, player.getPosition(), ObjectHelper.getSoundByName("botania", "doit"),
                     SoundCategory.BLOCKS, 2.5F, 0.7F);
         }
         double radius = 10.5;

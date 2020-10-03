@@ -31,7 +31,7 @@ public class BlockInfinitato extends BlockContainer implements ILexiconable {
     public BlockInfinitato() {
         super(Material.CLOTH);
         setRegistryName("infinitato");
-        setUnlocalizedName(AvaritiaTweaks.MODID + ".infinitato");
+        setTranslationKey(AvaritiaTweaks.MODID + ".infinitato");
         setHardness(0.25F);
         setCreativeTab(AvaritiaTweaks.TAB);
     }
@@ -155,7 +155,7 @@ public class BlockInfinitato extends BlockContainer implements ILexiconable {
         return false;
     }
 
-    @Override
+    @Override @SuppressWarnings("deprecation")
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }

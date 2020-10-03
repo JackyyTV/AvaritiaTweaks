@@ -4,6 +4,7 @@ import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import morph.avaritia.init.ModBlocks;
 import morph.avaritia.init.ModItems;
@@ -29,9 +30,9 @@ public class JEICompat implements IModPlugin {
     public void register(IModRegistry registry) {
         if (ModConfig.compats.jeiCompat) {
             if (ModConfig.compats.jei.descriptions) {
-                registry.addIngredientInfo(ModItems.neutron_pile, ItemStack.class, "desc.avaritiatweaks.neutron_pile");
-                registry.addIngredientInfo(new ItemStack(ModBlocks.neutron_collector), ItemStack.class, "desc.avaritiatweaks.neutron_collector");
-                registry.addIngredientInfo(new ItemStack(ModTweaks.enhancementCrystal), ItemStack.class, "desc.avaritiatweaks.enhancement_crystal");
+                registry.addIngredientInfo(ModItems.neutron_pile, VanillaTypes.ITEM, "desc.avaritiatweaks.neutron_pile");
+                registry.addIngredientInfo(new ItemStack(ModBlocks.neutron_collector), VanillaTypes.ITEM, "desc.avaritiatweaks.neutron_collector");
+                registry.addIngredientInfo(new ItemStack(ModTweaks.enhancementCrystal), VanillaTypes.ITEM, "desc.avaritiatweaks.enhancement_crystal");
             }
         }
     }

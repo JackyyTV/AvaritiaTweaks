@@ -2,38 +2,24 @@ package jackyy.avaritiatweaks.util;
 
 import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
+import jackyy.gunpowderlib.helper.ObjectHelper;
+import morph.avaritia.item.ItemArmorInfinity;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModUtils {
 
-    public static ItemStack getStackFromName(String name, int amount, int meta) {
-        Item item = Item.REGISTRY.getObject(new ResourceLocation(name));
-        ItemStack stack = ItemStack.EMPTY;
-        if (item != null) {
-            stack = new ItemStack(item, amount, meta);
-        }
-        return stack;
-    }
-
-    public static SoundEvent getSoundFromName(String name) {
-        SoundEvent sound = SoundEvent.REGISTRY.getObject(new ResourceLocation(name));
-        if (sound != null) {
-            return sound;
-        }
-        return SoundEvents.BLOCK_ANVIL_PLACE;
-    }
-
     public static ItemStack getFlower(String type) {
-        ItemStack flower = getStackFromName("botania:specialflower", 1, 0);
+        ItemStack flower = ObjectHelper.getItemStackByName("botania:specialflower", 1, 0);
         NBTTagCompound tag = new NBTTagCompound();
         tag.setString("type", type);
         flower.setTagCompound(tag);
@@ -75,6 +61,21 @@ public class ModUtils {
         }
         GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_upgrade"), null, output, Ingredient.fromStacks(input), Ingredient.fromStacks(new ItemStack(ModTweaks.enhancementCrystal)));
         GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_remove"), null, input, Ingredient.fromStacks(output));
+    }
+
+    public static boolean isArmorValid(EntityPlayer player, EntityEquipmentSlot slot) {
+        ItemStack armor = player.getItemStackFromSlot(slot);
+        return armor != ItemStack.EMPTY && armor.getItem() instanceof ItemArmorInfinity
+                && armor.getTagCompound() != null && armor.getTagCompound().getInteger("enhanced") == 1;
+    }
+
+    public static void checkAndAddEffect(EntityPlayer player, String[] potions) {
+        for (String potion : potions) {
+            Potion effect = Potion.getPotionFromResourceLocation(potion);
+            if (effect != null) {
+                player.addPotionEffect(new PotionEffect(effect, 300, 0, false, false));
+            }
+        }
     }
 
 }

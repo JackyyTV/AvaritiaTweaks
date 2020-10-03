@@ -26,7 +26,7 @@ public class ItemEnhancementCrystal extends Item implements IHaloRenderItem {
 
     public ItemEnhancementCrystal() {
         setRegistryName("enhancement_crystal");
-        setUnlocalizedName(AvaritiaTweaks.MODID + ".enhancement_crystal");
+        setTranslationKey(AvaritiaTweaks.MODID + ".enhancement_crystal");
         setCreativeTab(AvaritiaTweaks.TAB);
     }
 
@@ -45,7 +45,7 @@ public class ItemEnhancementCrystal extends Item implements IHaloRenderItem {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public EnumRarity getForgeRarity(ItemStack stack) {
         return ModItems.COSMIC_RARITY;
     }
 
