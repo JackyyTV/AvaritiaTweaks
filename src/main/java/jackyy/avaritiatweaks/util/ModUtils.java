@@ -1,12 +1,17 @@
 package jackyy.avaritiatweaks.util;
 
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
+import morph.avaritia.item.ItemArmorInfinity;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -87,6 +92,21 @@ public class ModUtils {
         }
         GameRegistry.addShapelessRecipe(output, input, ModTweaks.enhancementCrystal);
         GameRegistry.addShapelessRecipe(input, output);
+    }
+
+    public static boolean isArmorValid(EntityPlayer player, EntityEquipmentSlot slot) {
+        ItemStack armor = player.getItemStackFromSlot(slot);
+        return armor != null && armor.getItem() instanceof ItemArmorInfinity
+                && armor.getTagCompound() != null && armor.getTagCompound().getInteger("enhanced") == 1;
+    }
+
+    public static void checkAndAddEffect(EntityPlayer player, String[] potions) {
+        for (String potion : potions) {
+            Potion effect = Potion.getPotionFromResourceLocation(potion);
+            if (effect != null) {
+                player.addPotionEffect(new PotionEffect(effect, 300, 0, false, false));
+            }
+        }
     }
 
 }

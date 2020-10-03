@@ -4,9 +4,9 @@ import jackyy.avaritiatweaks.client.Keys;
 import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.packet.PacketHandler;
 import jackyy.avaritiatweaks.packet.PacketToggleNoClip;
+import jackyy.avaritiatweaks.util.ModUtils;
 import morph.avaritia.handler.AvaritiaEventHandler;
 import morph.avaritia.init.ModItems;
-import morph.avaritia.item.ItemArmorInfinity;
 import morph.avaritia.item.tools.ItemSwordInfinity;
 import morph.avaritia.util.TextUtils;
 import net.minecraft.block.Block;
@@ -17,8 +17,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -72,48 +70,35 @@ public class ModEventsHandler {
     public void armorTick(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-            if (isArmorValid(player, EntityEquipmentSlot.HEAD)) {
-                checkAndAddEffect(player, ModConfig.infinityArmor.infinityHelmetPotionEffects);
+            if (ModUtils.isArmorValid(player, EntityEquipmentSlot.HEAD)) {
+                ModUtils.checkAndAddEffect(player, ModConfig.infinityArmor.infinityHelmetPotionEffects);
             }
-            if (isArmorValid(player, EntityEquipmentSlot.CHEST)) {
-                checkAndAddEffect(player, ModConfig.infinityArmor.infinityChestplatePotionEffects);
+            if (ModUtils.isArmorValid(player, EntityEquipmentSlot.CHEST)) {
+                ModUtils.checkAndAddEffect(player, ModConfig.infinityArmor.infinityChestplatePotionEffects);
             }
-            if (isArmorValid(player, EntityEquipmentSlot.LEGS)) {
-                checkAndAddEffect(player, ModConfig.infinityArmor.infinityLeggingsPotionEffects);
+            if (ModUtils.isArmorValid(player, EntityEquipmentSlot.LEGS)) {
+                ModUtils.checkAndAddEffect(player, ModConfig.infinityArmor.infinityLeggingsPotionEffects);
             }
-            if (isArmorValid(player, EntityEquipmentSlot.FEET)) {
-                checkAndAddEffect(player, ModConfig.infinityArmor.infinityBootsPotionEffects);
+            if (ModUtils.isArmorValid(player, EntityEquipmentSlot.FEET)) {
+                ModUtils.checkAndAddEffect(player, ModConfig.infinityArmor.infinityBootsPotionEffects);
             }
-            if (isArmorValid(player, EntityEquipmentSlot.CHEST) && AvaritiaEventHandler.isInfinite(player) && noClip) {
-                player.capabilities.isFlying = true;
-                player.noClip = true;
-            }
-            if (!AvaritiaEventHandler.isInfinite(player) && !noClip) {
-                player.noClip = false;
-            }
-            if (noClip && !player.capabilities.isFlying) {
-                player.capabilities.isFlying = true;
-            }
-        }
-    }
-
-    private static boolean isArmorValid(EntityPlayer player, EntityEquipmentSlot slot) {
-        ItemStack armor = player.getItemStackFromSlot(slot);
-        return armor != null && armor.getItem() instanceof ItemArmorInfinity
-                && armor.getTagCompound() != null && armor.getTagCompound().getInteger("enhanced") == 1;
-    }
-
-    private static void checkAndAddEffect(EntityPlayer player, String[] potions) {
-        for (String potion : potions) {
-            Potion effect = Potion.getPotionFromResourceLocation(potion);
-            if (effect != null) {
-                player.addPotionEffect(new PotionEffect(effect, 300, 0, false, false));
+            if (ModConfig.infinityArmor.infinityArmorNoClip && !player.isSpectator()) {
+                if (ModUtils.isArmorValid(player, EntityEquipmentSlot.CHEST) && AvaritiaEventHandler.isInfinite(player) && noClip) {
+                    player.capabilities.isFlying = true;
+                    player.noClip = true;
+                }
+                if (!AvaritiaEventHandler.isInfinite(player) && !noClip) {
+                    player.noClip = false;
+                }
+                if (noClip && !player.capabilities.isFlying) {
+                    player.capabilities.isFlying = true;
+                }
             }
         }
     }
 
     public static void toggleNoClip(EntityPlayer player) {
-        if (isArmorValid(player, EntityEquipmentSlot.CHEST)) {
+        if (ModUtils.isArmorValid(player, EntityEquipmentSlot.CHEST)) {
             if (MAP.containsKey(player) && MAP.get(player)) {
                 MAP.remove(player);
                 noClip = false;
@@ -134,7 +119,7 @@ public class ModEventsHandler {
         if (item instanceof ItemSwordInfinity && ModConfig.tweaks.fixInfinitySwordTooltip) {
             for (int x = 0; x < tooltip.size(); x++) {
                 if (tooltip.get(x).contains(I18n.format("attribute.name.generic.attackDamage"))) {
-                    tooltip.set(x, " " + TextUtils.makeFabulous(I18n.format("tip.infinity")) + " "
+                    tooltip.set(x, " " + TextUtils.makeFabulous(I18n.format("tooltips.avaritiatweaks.infinite")) + " "
                             + TextFormatting.GRAY + I18n.format("attribute.name.generic.attackDamage"));
                     return;
                 }
