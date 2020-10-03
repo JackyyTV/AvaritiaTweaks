@@ -16,6 +16,7 @@ tile.avaritiatweaks.gaia_block.name=Gaia Block
 tooltips.avaritiatweaks.enhancement_crystal=Infinity isn't even enough.
 tooltips.avaritiatweaks.noclip.enabled=No Clip Mode: §a§lEnabled§r
 tooltips.avaritiatweaks.noclip.disabled=No Clip Mode: §c§lDisabled§r
+tooltips.avaritiatweaks.infinite=Infinite
 
 #Messages
 msg.avaritiatweaks.noclip.enabled=No Clip Mode is now §aEnabled§r
