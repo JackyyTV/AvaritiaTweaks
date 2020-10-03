@@ -1,0 +1,41 @@
+#Creative Tab
+itemGroup.avaritiatweaks=Avaritia Tweaks
+
+#Key Bindings
+key.categories.avaritiatweaks=Avaritia Tweaks
+key.infinity_armor.noclip=Включает/выключает режим прохождения сквозь стены
+key.infinity_armor.noclip.disabled=Включает/выключает режим прохождения сквозь стены (Выключается в конфиге!)
+
+#Items
+item.avaritiatweaks.enhancement_crystal.name=Кристалл улучшения
+
+#Blocks
+tile.avaritiatweaks.gaia_block.name=Блок Гайи
+
+#Tooltips
+tooltips.avaritiatweaks.enhancement_crystal=Недостаточно даже бесконечности.
+tooltips.avaritiatweaks.noclip.enabled=Режим прохождения сквозь стены: §a§lВключен§r
+tooltips.avaritiatweaks.noclip.disabled=Режим прохождения сквозь стены: §c§lВыключен§r
+
+#Messages
+msg.avaritiatweaks.noclip.enabled=Режим прохождения сквозь стены сейчас §aВключен§r
+msg.avaritiatweaks.noclip.disabled=Режим прохождения сквозь стены сейчас §cВыключен§r
+
+#JEI Integration
+desc.avaritiatweaks.neutron_pile=Создаётся в Сборщике Нейтрония.
+desc.avaritiatweaks.neutron_collector=Сборщик Нейстрония получает пылинку нейтрония каждые 7111 тиков, что составляет около 6 минут в реальной жизни.
+desc.avaritiatweaks.enhancement_crystal=Этот кристалл может быть прикреплён к Броне Бесконечности или Инструментам, чтобы дать им особые возможности, как зачарования, эффекты зелий, и т.д.
+
+#Botania Integration
+tile.avaritiatweaks.infinitato.name=Картошка Бесконечности
+tile.botania.flower.asgardandelion.lore=Полито слезами Vazkii :c
+tile.botania.flower.soarleander.lore=Просто подключи его к моим &oжииииииииииииииилам!&r
+tile.botania:flower.asgardandelion.name=Асгардуванчик
+botania.lexicon.asgardandelion=Асгардуванчик
+botania.lexicon.asgardandelion.0=Ходят слухе о цветке, который способен наделить своего владельца бесконечной маной. Если бы существовал такой цветок, он наверняка бы стоил несмертных богатсв.<BR>&oДо сих пор не ссылался.&r
+tile.botania:flower.soarleander.name=Парящая земля
+botania.lexicon.soarleander=Парящая земля
+botania.lexicon.soarleander.0=Если у вас избыток курицы или куриных продуктов, не читайте дальше!<BR>Парящая земля будет пожирать любую курятину (даже самих куриц), не трогая при этом никого другого.
+botania.lexicon.soarleander.1=&oЛюбой случайный сундук содержит побочные эффекты.&r
+botania.lexicon.infinitato=Картошка Бесконечности
+botania.lexicon.infinitato.0=Исследуя эффект наполнения вещей свойствами бесконечности, вы нашли новые интересные инструменты: Картошка Бесконечности - не исключение.<BR>Нечто большее, чем его родословный, и наделённый вниманием к &1Мини-картофеля&0 и &1Катализатору бесконечности&0, &1Картошка Бесконечности&0 верит, что ты всегда сможешь сделать всё, что угодно.
