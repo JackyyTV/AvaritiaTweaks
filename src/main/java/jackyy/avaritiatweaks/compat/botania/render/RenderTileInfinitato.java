@@ -1,9 +1,11 @@
 package jackyy.avaritiatweaks.compat.botania.render;
 
 import jackyy.avaritiatweaks.AvaritiaTweaks;
+import jackyy.avaritiatweaks.compat.botania.BotaniaCompat;
 import jackyy.avaritiatweaks.compat.botania.tile.TileInfinitato;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -15,13 +17,14 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderTileInfinitato extends TileEntitySpecialRenderer<TileInfinitato> {
 
-    public static boolean drawHalo = true;
     private static final ResourceLocation TEXTURE = new ResourceLocation(AvaritiaTweaks.MODID,"textures/blocks/infinitato.png");
-    public static final ResourceLocation HALO = new ResourceLocation("avaritia", "textures/items/halo128.png");
     private static final ModelInfinitato MODEL = new ModelInfinitato();
 
     @Override
     public void renderTileEntityAt(TileInfinitato te, double x, double y, double z, float partialTicks, int destroyStage) {
+        if (!te.getWorld().isBlockLoaded(te.getPos(), false)
+                || te.getWorld().getBlockState(te.getPos()).getBlock() != BotaniaCompat.infinitato)
+            return;
         Tessellator tessellator = Tessellator.getInstance();
         VertexBuffer buffer = tessellator.getBuffer();
         Minecraft mc = Minecraft.getMinecraft();
@@ -33,44 +36,6 @@ public class RenderTileInfinitato extends TileEntitySpecialRenderer<TileInfinita
         GlStateManager.translate(0.5F, 1.5F, 0.5F);
         GlStateManager.scale(1F, -1F, -1F);
         int meta = te.getBlockMetadata();
-        if (drawHalo) {
-            this.bindTexture(HALO);
-            GlStateManager.pushMatrix();
-            double xdiff = (te.getPos().getX() + 0.5) - pos.hitVec.xCoord;
-            double ydiff = (te.getPos().getY() + 0.4) - pos.hitVec.yCoord;
-            double zdiff = (te.getPos().getZ() + 0.5) - pos.hitVec.zCoord;
-            double len = Math.sqrt(xdiff*xdiff + ydiff*ydiff + zdiff*zdiff);
-            xdiff /= len;
-            ydiff /= len;
-            zdiff /= len;
-            GlStateManager.translate(-xdiff, ydiff, zdiff);
-            GlStateManager.scale(1F, -1F, -1F);
-            GlStateManager.translate(0F, -1.15F, 0F);
-            GlStateManager.rotate((float) -pos.hitVec.yCoord, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate((float) pos.hitVec.xCoord, 1.0F, 0.0F, 0.0F);
-            float f = 1.6F;
-            float f1 = 0.016666668F * f;
-            GlStateManager.scale(f1, f1, f1);
-            GlStateManager.disableLighting();
-            GlStateManager.depthMask(false);
-            GlStateManager.enableBlend();
-            GlStateManager.disableAlpha();
-            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-            int i=60;
-            buffer.color(0.0F, 0.0F, 0.0F, 1.0F);
-            buffer.pos(-i, -i, 0.0D).tex(0,0).endVertex();
-            buffer.pos(-i, i, 0.0D).tex(1,0).endVertex();
-            buffer.pos(i, i, 0.0D).tex(1,1).endVertex();
-            buffer.pos(i, -i, 0.0D).tex(0,1).endVertex();
-            tessellator.draw();
-            GlStateManager.depthMask(true);
-            GlStateManager.enableLighting();
-            GlStateManager.disableBlend();
-            GlStateManager.enableAlpha();
-            GlStateManager.color(1F, 1F, 1F, 1F);
-            GlStateManager.popMatrix();
-        }
         float rotY = meta * 90F - 180F;
         GlStateManager.rotate(rotY, 0F, 1F, 0F);
         float jump = te.jumpTicks*0.5f;
@@ -92,11 +57,11 @@ public class RenderTileInfinitato extends TileEntitySpecialRenderer<TileInfinita
         GlStateManager.rotate(-rotY, 0F, 1F, 0F);
         GlStateManager.color(1F, 1F, 1F);
         GlStateManager.scale(1F, -1F, -1F);
-        if(!te.name.isEmpty() && pos != null && pos.hitVec.xCoord == pos.hitVec.xCoord && pos.hitVec.yCoord == pos.hitVec.yCoord && pos.hitVec.zCoord == pos.hitVec.zCoord) {
+        if (!te.name.isEmpty() && pos != null && te.getPos().equals(pos.getBlockPos())) {
             GlStateManager.pushMatrix();
-            GlStateManager.translate(0F, -0.4F, 0F);
-            GlStateManager.rotate((float) -pos.hitVec.yCoord, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate((float) pos.hitVec.xCoord, 1.0F, 0.0F, 0.0F);
+            GlStateManager.translate(0F, -0.6F, 0F);
+            GlStateManager.rotate(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
             float f = 1.6F;
             float f1 = 0.016666668F * f;
             GlStateManager.scale(-f1, -f1, f1);
@@ -104,21 +69,20 @@ public class RenderTileInfinitato extends TileEntitySpecialRenderer<TileInfinita
             GlStateManager.translate(0.0F, 0F / f1, 0.0F);
             GlStateManager.depthMask(false);
             GlStateManager.enableBlend();
-            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            GlStateManager.enableTexture2D();
-            buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+            OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+            GlStateManager.disableTexture2D();
+            buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
             int i = mc.fontRendererObj.getStringWidth(te.name) / 2;
-            buffer.color(0.0F, 0.0F, 0.0F, 0.25F);
-            buffer.pos(-i - 1, -1.0D, 0.0D).endVertex();
-            buffer.pos(-i - 1, 8.0D, 0.0D).endVertex();
-            buffer.pos(i + 1, 8.0D, 0.0D).endVertex();
-            buffer.pos(i + 1, -1.0D, 0.0D).endVertex();
+            buffer.pos(-i - 1, -1.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+            buffer.pos(-i - 1, 8.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+            buffer.pos(i + 1, 8.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+            buffer.pos(i + 1, -1.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
             tessellator.draw();
             GlStateManager.enableTexture2D();
             GlStateManager.depthMask(true);
             mc.fontRendererObj.drawString(te.name, -mc.fontRendererObj.getStringWidth(te.name) / 2, 0, 0xFFFFFF);
             GlStateManager.enableLighting();
-            GlStateManager.enableBlend();
+            GlStateManager.disableBlend();
             GlStateManager.color(1F, 1F, 1F, 1F);
             GlStateManager.scale(1F / -f1, 1F / -f1, 1F / f1);
             GlStateManager.popMatrix();
