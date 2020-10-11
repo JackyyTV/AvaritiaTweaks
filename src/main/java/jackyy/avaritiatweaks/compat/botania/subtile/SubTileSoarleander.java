@@ -1,6 +1,7 @@
 package jackyy.avaritiatweaks.compat.botania.subtile;
 
 import jackyy.avaritiatweaks.config.ModConfig;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -8,39 +9,39 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import vazkii.botania.api.lexicon.LexiconEntry;
 import vazkii.botania.api.subtile.RadiusDescriptor;
 import vazkii.botania.api.subtile.SubTileGenerating;
-import vazkii.botania.common.core.handler.MethodHandles;
-
-import java.util.List;
 
 public class SubTileSoarleander extends SubTileGenerating {
 
     public static LexiconEntry lexicon;
     private static final String BURN_TIME = "burnTime";
     private static final int RANGE = 3;
+    private static final int START_BURN_EVENT = 0;
     int burnTime = 0;
 
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if(linkedCollector != null) {
-            if(burnTime == 0) {
-                if(mana < getMaxMana()) {
-                    boolean burnt = false;
+        if (burnTime > 0)
+            burnTime--;
+        if (getWorld().isRemote) {
+            if (burnTime > 0 && supertile.getWorld().rand.nextInt(10) == 0) {
+                Vec3d offset = getWorld().getBlockState(getPos()).getOffset(getWorld(), getPos()).addVector(0.4, 0.7, 0.4);
+                supertile.getWorld().spawnParticle(EnumParticleTypes.FLAME, supertile.getPos().getX() + offset.x + Math.random() * 0.2, supertile.getPos().getY() + offset.y, supertile.getPos().getZ() + offset.z + Math.random() * 0.2, 0.0D, 0.0D, 0.0D);
+            }
+            return;
+        }
+        if (linkedCollector != null) {
+            if (burnTime == 0) {
+                if (mana < getMaxMana()) {
                     int slowdown = getSlowdownFactor();
-                    List<EntityItem> items = supertile.getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(supertile.getPos().add(-RANGE, -RANGE, -RANGE), supertile.getPos().add(RANGE + 1, RANGE + 1, RANGE + 1)));
-                    for (EntityItem item : items) {
-                        int itemAge;
-                        try {
-                            itemAge = (int) MethodHandles.itemAge_getter.invokeExact(item);
-                        } catch (Throwable t) {
-                            continue;
-                        }
-                        if (itemAge >= 59 + slowdown && !item.isDead) {
+                    for (EntityItem item : supertile.getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(supertile.getPos().add(-RANGE, -RANGE, -RANGE), supertile.getPos().add(RANGE + 1, RANGE + 1, RANGE + 1)))) {
+                        if (item.age >= 59 + slowdown && !item.isDead) {
                             ItemStack stack = item.getItem();
-                            if (stack.getItem().hasContainerItem(stack))
+                            if (stack.isEmpty() || stack.getItem().hasContainerItem(stack))
                                 continue;
                             int burnTime = 0;
                             switch (stack.getItem().getRegistryName().toString()) {
@@ -59,28 +60,33 @@ public class SubTileSoarleander extends SubTileGenerating {
                             }
                             if (burnTime > 0 && stack.getCount() > 0) {
                                 this.burnTime = burnTime;
-                                if (!supertile.getWorld().isRemote) {
-                                    stack.shrink(1);
-                                    supertile.getWorld().playSound(null, supertile.getPos(), SoundEvents.ENTITY_CHICKEN_HURT, SoundCategory.BLOCKS, 0.2F, 1F);
-                                    burnt = true;
-                                } else {
-                                    item.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, item.posX, item.posY + 0.1, item.posZ, 0.0D, 0.0D, 0.0D);
-                                    item.world.spawnParticle(EnumParticleTypes.FLAME, item.posX, item.posY, item.posZ, 0.0D, 0.0D, 0.0D);
-                                }
-                                break;
+                                stack.shrink(1);
+                                supertile.getWorld().playSound(null, supertile.getPos(), SoundEvents.ENTITY_CHICKEN_HURT, SoundCategory.BLOCKS, 0.2F, 1F);
+                                getWorld().addBlockEvent(getPos(), getWorld().getBlockState(getPos()).getBlock(), START_BURN_EVENT, item.getEntityId());
+                                sync();
+                                return;
                             }
                         }
                     }
-                    if (burnt)
-                        sync();
                 }
-            } else {
-                if (supertile.getWorld().rand.nextInt(10) == 0)
-                    supertile.getWorld().spawnParticle(EnumParticleTypes.FLAME, supertile.getPos().getX() + 0.4 + Math.random() * 0.2, supertile.getPos().getY() + 0.65, supertile.getPos().getZ() + 0.4 + Math.random() * 0.2, 0.0D, 0.0D, 0.0D);
-                burnTime--;
             }
         }
     }
+
+    @Override
+    public boolean receiveClientEvent(int event, int param) {
+        if (event == START_BURN_EVENT) {
+            Entity entity = getWorld().getEntityByID(param);
+            if (entity != null) {
+                entity.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, entity.posX, entity.posY + 0.1, entity.posZ, 0.0D, 0.0D, 0.0D);
+                entity.world.spawnParticle(EnumParticleTypes.FLAME, entity.posX, entity.posY, entity.posZ, 0.0D, 0.0D, 0.0D);
+            }
+            return true;
+        } else {
+            return super.receiveClientEvent(event, param);
+        }
+    }
+
 
     @Override
     public int getMaxMana() {
