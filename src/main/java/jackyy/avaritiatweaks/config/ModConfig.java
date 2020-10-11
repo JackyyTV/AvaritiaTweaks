@@ -59,7 +59,7 @@ public class ModConfig {
                 public boolean enabled = true;
                 @Config.Comment("Set the max mana that can be stored by Asgardandelion")
                 public int maxMana = 1000000;
-                @Config.Comment("Set the amount of mana generated during each passive generation cycle for Asgardandelion")
+                @Config.Comment("Set the amount of mana generated during each generation cycle for Asgardandelion")
                 public int generationCycleMana = 1000000;
                 @Config.Comment("Set the delay in ticks between each generation cycle for Asgardandelion")
                 public int generationCycleDelay = 1;
@@ -70,7 +70,7 @@ public class ModConfig {
                 public boolean enabled = true;
                 @Config.Comment("Set the max mana that can be stored by Soarleander")
                 public int maxMana = 1000000;
-                @Config.Comment("Set the amount of mana generated during each passive generation cycle for Soarleander")
+                @Config.Comment("Set the amount of mana generated during each generation cycle for Soarleander")
                 public int generationCycleMana = 100;
                 @Config.Comment("Set the delay in ticks between each generation cycle for Soarleander")
                 public int generationCycleDelay = 20;
