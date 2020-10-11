@@ -11,6 +11,6 @@ import java.util.function.BooleanSupplier;
 public class AsgardandelionConditionFactory implements IConditionFactory {
     @Override
     public BooleanSupplier parse(JsonContext context, JsonObject json) {
-        return () -> (ModConfig.compats.botania.asgardandelion && ModConfig.compats.botaniaCompat) == JsonUtils.getBoolean(json, "value", true);
+        return () -> (ModConfig.compats.botania.asgardandelion.enabled && ModConfig.compats.botaniaCompat) == JsonUtils.getBoolean(json, "value", true);
     }
 }
