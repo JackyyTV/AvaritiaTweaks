@@ -16,9 +16,9 @@ import org.lwjgl.opengl.GL11;
 public class RenderTileInfinitato extends TileEntitySpecialRenderer<TileInfinitato> {
 
     public static boolean drawHalo = true;
-    private static final ResourceLocation texture = new ResourceLocation(AvaritiaTweaks.MODID,"textures/blocks/infinitato.png");
-    public static final ResourceLocation halo = new ResourceLocation("avaritia", "textures/items/halo128.png");
-    private static final ModelInfinitato model = new ModelInfinitato();
+    private static final ResourceLocation TEXTURE = new ResourceLocation(AvaritiaTweaks.MODID,"textures/blocks/infinitato.png");
+    public static final ResourceLocation HALO = new ResourceLocation("avaritia", "textures/items/halo128.png");
+    private static final ModelInfinitato MODEL = new ModelInfinitato();
 
     @Override
     public void renderTileEntityAt(TileInfinitato te, double x, double y, double z, float partialTicks, int destroyStage) {
@@ -34,7 +34,7 @@ public class RenderTileInfinitato extends TileEntitySpecialRenderer<TileInfinita
         GlStateManager.scale(1F, -1F, -1F);
         int meta = te.getBlockMetadata();
         if (drawHalo) {
-            mc.renderEngine.bindTexture(halo);
+            this.bindTexture(HALO);
             GlStateManager.pushMatrix();
             double xdiff = (te.getPos().getX() + 0.5) - pos.hitVec.xCoord;
             double ydiff = (te.getPos().getY() + 0.4) - pos.hitVec.yCoord;
@@ -80,8 +80,8 @@ public class RenderTileInfinitato extends TileEntitySpecialRenderer<TileInfinita
         float rotZ = (float) Math.sin(jump / 10 * Math.PI) * 2;
         GlStateManager.translate(0F, up, 0F);
         GlStateManager.rotate(rotZ, 0F, 0F, 1F);
-        mc.renderEngine.bindTexture(texture);
-        model.render();
+        mc.renderEngine.bindTexture(TEXTURE);
+        MODEL.render();
         GlStateManager.pushMatrix();
         mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         float scale = 1F / 4F;

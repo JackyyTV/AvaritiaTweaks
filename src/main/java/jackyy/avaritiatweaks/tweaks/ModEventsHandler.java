@@ -94,6 +94,10 @@ public class ModEventsHandler {
                     player.capabilities.isFlying = true;
                 }
             }
+            if (player.isSpectator()) {
+                player.capabilities.isFlying = true;
+                player.noClip = true;
+            }
         }
     }
 

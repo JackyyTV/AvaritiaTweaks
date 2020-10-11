@@ -51,12 +51,30 @@ public class ModConfig {
         public static class Botania {
             @Config.Comment("If true, enables Gaia Block")
             public boolean gaiaBlock = true;
-            @Config.Comment("If true, enables Asgardandelion")
-            public boolean asgardandelion = true;
-            @Config.Comment("If true, enables Soarleander")
-            public boolean soarleander = true;
             @Config.Comment("If true, enables Infinitato")
             public boolean infinitato = true;
+            public static Asgardandelion asgardandelion = new Asgardandelion();
+            public static class Asgardandelion {
+                @Config.Comment("If true, enables Asgardandelion")
+                public boolean enabled = true;
+                @Config.Comment("Set the max mana that can be stored by Asgardandelion")
+                public int maxMana = 1000000;
+                @Config.Comment("Set the amount of mana generated during each passive generation cycle for Asgardandelion")
+                public int generationCycleMana = 1000000;
+                @Config.Comment("Set the delay in ticks between each generation cycle for Asgardandelion")
+                public int generationCycleDelay = 1;
+            }
+            public static Soarleander soarleander = new Soarleander();
+            public static class Soarleander {
+                @Config.Comment("If true, enables Soarleander")
+                public boolean enabled = true;
+                @Config.Comment("Set the max mana that can be stored by Soarleander")
+                public int maxMana = 1000000;
+                @Config.Comment("Set the amount of mana generated during each passive generation cycle for Soarleander")
+                public int generationCycleMana = 100;
+                @Config.Comment("Set the delay in ticks between each generation cycle for Soarleander")
+                public int generationCycleDelay = 20;
+            }
         }
     }
 
