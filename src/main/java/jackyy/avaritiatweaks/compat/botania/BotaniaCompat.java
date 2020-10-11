@@ -36,7 +36,7 @@ public class BotaniaCompat {
     public static void preInit() {
         GameRegistry.register(gaiaBlock);
         GameRegistry.register(new ItemBlock(gaiaBlock), gaiaBlock.getRegistryName());
-        if (ModConfig.compats.botania.asgardandelion) {
+        if (ModConfig.compats.botania.asgardandelion.enabled) {
             BotaniaAPI.registerSubTile("asgardandelion", SubTileAsgardandelion.class);
             BotaniaAPI.registerSubTileSignature(SubTileAsgardandelion.class, new BasicSignature("asgardandelion") {
                 @Override
@@ -46,7 +46,7 @@ public class BotaniaCompat {
             });
             BotaniaAPI.addSubTileToCreativeMenu("asgardandelion");
         }
-        if (ModConfig.compats.botania.soarleander) {
+        if (ModConfig.compats.botania.soarleander.enabled) {
             BotaniaAPI.registerSubTile("soarleander", SubTileSoarleander.class);
             BotaniaAPI.registerSubTileSignature(SubTileSoarleander.class, new BasicSignature("soarleander") {
                 @Override
@@ -64,14 +64,14 @@ public class BotaniaCompat {
     }
 
     public static void init() {
-        if (ModConfig.compats.botania.asgardandelion) {
+        if (ModConfig.compats.botania.asgardandelion.enabled) {
             SubTileAsgardandelion.lexicon = new BotaniaLexiconEntry("asgardandelion", BotaniaAPI.categoryGenerationFlowers);
             SubTileAsgardandelion.lexicon.setLexiconPages(
                     BotaniaAPI.internalHandler.textPage("botania.lexicon.asgardandelion.0")
             );
             SubTileAsgardandelion.lexicon.setIcon(asgardandelion);
         }
-        if (ModConfig.compats.botania.soarleander) {
+        if (ModConfig.compats.botania.soarleander.enabled) {
             SubTileSoarleander.lexicon = new BotaniaLexiconEntry("soarleander", BotaniaAPI.categoryGenerationFlowers);
             SubTileSoarleander.lexicon.setLexiconPages(
                     BotaniaAPI.internalHandler.textPage("botania.lexicon.soarleander.0"),
@@ -96,10 +96,10 @@ public class BotaniaCompat {
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(gaiaBlock), 0, new ModelResourceLocation(gaiaBlock.getRegistryName(), "inventory"));
-        if (ModConfig.compats.botania.asgardandelion) {
+        if (ModConfig.compats.botania.asgardandelion.enabled) {
             BotaniaAPIClient.registerSubtileModel(SubTileAsgardandelion.class, new ModelResourceLocation(AvaritiaTweaks.MODID + ":asgardandelion"));
         }
-        if (ModConfig.compats.botania.soarleander) {
+        if (ModConfig.compats.botania.soarleander.enabled) {
             BotaniaAPIClient.registerSubtileModel(SubTileSoarleander.class, new ModelResourceLocation(AvaritiaTweaks.MODID + ":soarleander"));
         }
         if (ModConfig.compats.botania.infinitato) {
@@ -117,7 +117,7 @@ public class BotaniaCompat {
             );
             GameRegistry.addShapelessRecipe(ModUtils.getStackFromName("botania:manaresource", 9, 14), new ItemStack(gaiaBlock));
         }
-        if (ModConfig.compats.botania.asgardandelion) {
+        if (ModConfig.compats.botania.asgardandelion.enabled) {
             ExtremeCraftingManager.getInstance().addRecipe(
                     asgardandelion,
                     "   III   ",
@@ -135,7 +135,7 @@ public class BotaniaCompat {
                     'n', new ItemStack(ModItems.resource, 1, 3)
             );
         }
-        if (ModConfig.compats.botania.soarleander) {
+        if (ModConfig.compats.botania.soarleander.enabled) {
             BotaniaAPI.registerRuneAltarRecipe(
                     soarleander, 8000, ModUtils.getFlower("gourmaryllis"),
                     new ItemStack(Items.CHICKEN), new ItemStack(Items.CHICKEN),
