@@ -1,7 +1,7 @@
 # AvaritiaTweaks
 [![Downloads](http://cf.way2muchnoise.eu/full_avaritia-tweaks_downloads.svg)](https://minecraft.curseforge.com/projects/avaritia-tweaks) [![MCVersion](http://cf.way2muchnoise.eu/versions/avaritia-tweaks.svg)](https://minecraft.curseforge.com/projects/avaritia-tweaks)
 
-[![GitHub issues](https://img.shields.io/github/issues/JackyyTV/AvaritiaTweaks.svg)](https://github.com/JackyyTV/AvaritiaTweaks/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/JackyyTV/AvaritiaTweaks.svg)](https://github.com/JackyyTV/AvaritiaTweaks/pulls) [![license](https://img.shields.io/github/license/JackyyTV/AvaritiaTweaks.svg)](../dev-1.12.2/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/JackyyTV/AvaritiaTweaks.svg)](https://github.com/JackyyTV/AvaritiaTweaks/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/JackyyTV/AvaritiaTweaks.svg)](https://github.com/JackyyTV/AvaritiaTweaks/pulls)
 
 ---
 
