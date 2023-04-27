@@ -48,10 +48,10 @@ repositories {
 
 dependencies {
   deobfCompile "mezz.jei:jei_1.10.2:+"
-  deobfCompile "curse.maven:hwyla:2433252" //1.8.17-B31_1.10.2
+  deobfCompile "curse.maven:hwyla-253449:2433252" //1.8.17-B31_1.10.2
   deobfCompile "codechicken:CodeChickenLib:1.10.2-+:universal"
-  deobfCompile "curse.maven:avaritia:2441664" //1.10.2-2.2.7
-  deobfCompile "curse.maven:botania:2391169" //r1.9-341
+  deobfCompile "curse.maven:avaritia-261348:2441664" //1.10.2-2.2.7
+  deobfCompile "curse.maven:botania-225643:2391169" //r1.9-341
 }
 
 processResources {

@@ -2,6 +2,7 @@ package jackyy.avaritiatweaks.util;
 
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
 import morph.avaritia.item.ItemArmorInfinity;
+import morph.avaritia.item.tools.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
@@ -98,6 +99,16 @@ public class ModUtils {
         ItemStack armor = player.getItemStackFromSlot(slot);
         return armor != null && armor.getItem() instanceof ItemArmorInfinity
                 && armor.getTagCompound() != null && armor.getTagCompound().getInteger("enhanced") == 1;
+    }
+
+    public static boolean isEnhanced(ItemStack stack) {
+        return stack != null && (stack.getItem() instanceof ItemArmorInfinity
+                || stack.getItem() instanceof ItemSwordInfinity
+                || stack.getItem() instanceof ItemPickaxeInfinity
+                || stack.getItem() instanceof ItemAxeInfinity
+                || stack.getItem() instanceof ItemShovelInfinity
+                || stack.getItem() instanceof ItemBowInfinity)
+                && stack.getTagCompound() != null && stack.getTagCompound().getInteger("enhanced") == 1;
     }
 
     public static void checkAndAddEffect(EntityPlayer player, String[] potions) {

@@ -18,7 +18,7 @@ public class AvaritiaTweaks {
 
     public static final String MODID = "avaritiatweaks";
     public static final String MODNAME = "Avaritia Tweaks";
-    public static final String VERSION = "1.10.2-1.3";
+    public static final String VERSION = "1.10.2-1.3.1";
     public static final String MCVERSION = "[1.10,1.11)";
     public static final String DEPENDS = "required-after:avaritia;required-after:CodeChickenLib;after:Botania;";
     public static final String GUIFACTORY = "jackyy.avaritiatweaks.config.ConfigGuiFactory";
@@ -53,7 +53,7 @@ public class AvaritiaTweaks {
 
     @Mod.EventHandler
     public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-        logger.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been modified. This will NOT be supported by the mod author!");
+        logger.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been modified or running in dev environment.");
     }
 
 }
