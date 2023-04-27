@@ -3,8 +3,6 @@ itemGroup.avaritiatweaks=Avaritia Tweaks
 
 #Key Bindings
 key.categories.avaritiatweaks=Avaritia Tweaks
-key.infinity_armor.noclip=切换观察者模式
-key.infinity_armor.noclip.disabled=切换观察者模式（可在配置中禁用）
 
 #Items
 item.avaritiatweaks.enhancement_crystal.name=无暇水晶
@@ -14,13 +12,7 @@ tile.avaritiatweaks.gaia_block.name=盖亚块
 
 #Tooltips
 tooltips.avaritiatweaks.enhancement_crystal=无尽或许还不够贪婪
-tooltips.avaritiatweaks.noclip.enabled=观察者模式：§a§l启用§r
-tooltips.avaritiatweaks.noclip.disabled=观察者模式：§c§l禁用§r
 tooltips.avaritiatweaks.infinite=无限
-
-#Messages
-msg.avaritiatweaks.noclip.enabled=观察者模式已经§a启用§r
-msg.avaritiatweaks.noclip.disabled=观察者模式已经§c禁用§r
 
 #JEI Integration
 desc.avaritiatweaks.neutron_pile=由中子态素收集器生产。

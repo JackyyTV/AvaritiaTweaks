@@ -90,11 +90,6 @@ public class ModConfig {
                 "Requires Enhancement Crystal to be installed on Infinity Boots"
         })
         public String[] infinityBootsPotionEffects = new String[0];
-        @Config.Comment({
-                "If true, enables No Clip mode for Infinity Armor",
-                "Requires Enhancement Crystal to be installed on Infinity Chestplate"
-        })
-        public boolean infinityArmorNoClip = true;
     }
 
     public static class InfinityTools {

@@ -3,8 +3,6 @@ itemGroup.avaritiatweaks=Avaritia Tweaks
 
 #Key Bindings
 key.categories.avaritiatweaks=Avaritia Tweaks
-key.infinity_armor.noclip=Включает/выключает режим прохождения сквозь стены
-key.infinity_armor.noclip.disabled=Включает/выключает режим прохождения сквозь стены (Выключается в конфиге!)
 
 #Items
 item.avaritiatweaks.enhancement_crystal.name=Кристалл улучшения
@@ -14,12 +12,6 @@ tile.avaritiatweaks.gaia_block.name=Блок Гайи
 
 #Tooltips
 tooltips.avaritiatweaks.enhancement_crystal=Недостаточно даже бесконечности.
-tooltips.avaritiatweaks.noclip.enabled=Режим прохождения сквозь стены: §a§lВключен§r
-tooltips.avaritiatweaks.noclip.disabled=Режим прохождения сквозь стены: §c§lВыключен§r
-
-#Messages
-msg.avaritiatweaks.noclip.enabled=Режим прохождения сквозь стены сейчас §aВключен§r
-msg.avaritiatweaks.noclip.disabled=Режим прохождения сквозь стены сейчас §cВыключен§r
 
 #JEI Integration
 desc.avaritiatweaks.neutron_pile=Создаётся в Сборщике Нейтрония.
