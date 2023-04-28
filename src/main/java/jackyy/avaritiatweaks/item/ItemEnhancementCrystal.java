@@ -1,7 +1,7 @@
 package jackyy.avaritiatweaks.item;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.config.ModConfig;
+import jackyy.avaritiatweaks.util.Reference;
 import morph.avaritia.api.IHaloRenderItem;
 import morph.avaritia.entity.EntityImmortalItem;
 import morph.avaritia.init.AvaritiaTextures;
@@ -26,8 +26,8 @@ public class ItemEnhancementCrystal extends Item implements IHaloRenderItem {
 
     public ItemEnhancementCrystal() {
         setRegistryName("enhancement_crystal");
-        setUnlocalizedName(AvaritiaTweaks.MODID + ".enhancement_crystal");
-        setCreativeTab(AvaritiaTweaks.TAB);
+        setUnlocalizedName(Reference.MODID + ".enhancement_crystal");
+        setCreativeTab(Reference.TAB);
     }
 
     @Override @SideOnly(Side.CLIENT)

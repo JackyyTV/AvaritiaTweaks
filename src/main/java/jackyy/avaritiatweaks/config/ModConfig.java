@@ -1,13 +1,13 @@
 package jackyy.avaritiatweaks.config;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
+import jackyy.avaritiatweaks.util.Reference;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Config(modid = AvaritiaTweaks.MODID, name = "AvaritiaTweaks", category = AvaritiaTweaks.MODID)
+@Config(modid = Reference.MODID, name = "AvaritiaTweaks", category = Reference.MODID)
 public class ModConfig {
 
     public static Tweaks tweaks = new Tweaks();
@@ -135,8 +135,8 @@ public class ModConfig {
     public static class ConfigHolder {
         @SubscribeEvent
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals(AvaritiaTweaks.MODID)) {
-                ConfigManager.sync(AvaritiaTweaks.MODID, Config.Type.INSTANCE);
+            if (event.getModID().equals(Reference.MODID)) {
+                ConfigManager.sync(Reference.MODID, Config.Type.INSTANCE);
             }
         }
     }

@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["Jackyy"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "assets/avaritiatweaks/logo.png",
   "screenshots": [],
   "dependencies": ["avaritia"]
 }

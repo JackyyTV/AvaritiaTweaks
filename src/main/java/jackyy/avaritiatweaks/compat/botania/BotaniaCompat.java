@@ -1,6 +1,5 @@
 package jackyy.avaritiatweaks.compat.botania;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.compat.botania.block.BlockGaia;
 import jackyy.avaritiatweaks.compat.botania.block.BlockInfinitato;
 import jackyy.avaritiatweaks.compat.botania.render.RenderTileInfinitato;
@@ -9,6 +8,7 @@ import jackyy.avaritiatweaks.compat.botania.subtile.SubTileSoarleander;
 import jackyy.avaritiatweaks.compat.botania.tile.TileInfinitato;
 import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.util.ModUtils;
+import jackyy.avaritiatweaks.util.Reference;
 import morph.avaritia.init.ModItems;
 import morph.avaritia.recipe.extreme.ExtremeCraftingManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -97,10 +97,10 @@ public class BotaniaCompat {
     public static void initModels() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(gaiaBlock), 0, new ModelResourceLocation(gaiaBlock.getRegistryName(), "inventory"));
         if (ModConfig.compats.botania.asgardandelion.enabled) {
-            BotaniaAPIClient.registerSubtileModel(SubTileAsgardandelion.class, new ModelResourceLocation(AvaritiaTweaks.MODID + ":asgardandelion"));
+            BotaniaAPIClient.registerSubtileModel(SubTileAsgardandelion.class, new ModelResourceLocation(Reference.MODID + ":asgardandelion"));
         }
         if (ModConfig.compats.botania.soarleander.enabled) {
-            BotaniaAPIClient.registerSubtileModel(SubTileSoarleander.class, new ModelResourceLocation(AvaritiaTweaks.MODID + ":soarleander"));
+            BotaniaAPIClient.registerSubtileModel(SubTileSoarleander.class, new ModelResourceLocation(Reference.MODID + ":soarleander"));
         }
         if (ModConfig.compats.botania.infinitato) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(infinitato), 0, new ModelResourceLocation(infinitato.getRegistryName(), "facing=south"));

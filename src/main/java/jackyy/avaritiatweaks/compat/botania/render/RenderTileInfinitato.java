@@ -1,8 +1,8 @@
 package jackyy.avaritiatweaks.compat.botania.render;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.compat.botania.BotaniaCompat;
 import jackyy.avaritiatweaks.compat.botania.tile.TileInfinitato;
+import jackyy.avaritiatweaks.util.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderTileInfinitato extends TileEntitySpecialRenderer<TileInfinitato> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AvaritiaTweaks.MODID,"textures/blocks/infinitato.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Reference.MODID,"textures/blocks/infinitato.png");
     private static final ModelInfinitato MODEL = new ModelInfinitato();
 
     @Override

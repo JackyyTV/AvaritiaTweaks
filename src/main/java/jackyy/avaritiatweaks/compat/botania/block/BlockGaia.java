@@ -1,7 +1,7 @@
 package jackyy.avaritiatweaks.compat.botania.block;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.config.ModConfig;
+import jackyy.avaritiatweaks.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,12 +22,12 @@ public class BlockGaia extends Block {
     public BlockGaia() {
         super(Material.IRON);
         setRegistryName("gaia_block");
-        setUnlocalizedName(AvaritiaTweaks.MODID + ".gaia_block");
+        setUnlocalizedName(Reference.MODID + ".gaia_block");
         setSoundType(SoundType.METAL);
         setHarvestLevel("pickaxe", 3);
         setHardness(50.0F);
         setResistance(2000.0F);
-        setCreativeTab(AvaritiaTweaks.TAB);
+        setCreativeTab(Reference.TAB);
     }
 
     @Override @SideOnly(Side.CLIENT)
