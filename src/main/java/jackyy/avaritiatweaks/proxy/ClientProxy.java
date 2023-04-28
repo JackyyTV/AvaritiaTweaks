@@ -1,6 +1,6 @@
 package jackyy.avaritiatweaks.proxy;
 
-import jackyy.avaritiatweaks.client.Keys;
+import jackyy.avaritiatweaks.tweaks.ClientEventsHandler;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,6 +15,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new ClientEventsHandler());
     }
 
     @SubscribeEvent
@@ -26,7 +27,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent e) {
         super.init(e);
-        Keys.init();
 	}
 
     @Override

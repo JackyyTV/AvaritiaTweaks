@@ -1,7 +1,5 @@
 package jackyy.avaritiatweaks.proxy;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
-import jackyy.avaritiatweaks.packet.PacketHandler;
 import jackyy.avaritiatweaks.tweaks.ModEventsHandler;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
 import net.minecraft.block.Block;
@@ -17,7 +15,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
-        PacketHandler.registerMessages(AvaritiaTweaks.MODID);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ModEventsHandler());
     }

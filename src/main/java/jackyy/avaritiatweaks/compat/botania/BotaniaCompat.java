@@ -1,6 +1,5 @@
 package jackyy.avaritiatweaks.compat.botania;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.compat.botania.block.BlockGaia;
 import jackyy.avaritiatweaks.compat.botania.block.BlockInfinitato;
 import jackyy.avaritiatweaks.compat.botania.render.RenderTileInfinitato;
@@ -8,7 +7,7 @@ import jackyy.avaritiatweaks.compat.botania.subtile.SubTileAsgardandelion;
 import jackyy.avaritiatweaks.compat.botania.subtile.SubTileSoarleander;
 import jackyy.avaritiatweaks.compat.botania.tile.TileInfinitato;
 import jackyy.avaritiatweaks.config.ModConfig;
-import jackyy.avaritiatweaks.util.ModUtils;
+import jackyy.avaritiatweaks.util.Reference;
 import jackyy.gunpowderlib.helper.ObjectHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -50,7 +49,7 @@ public class BotaniaCompat {
             BotaniaAPI.registerSubTileSignature(SubTileAsgardandelion.class, new BasicSignature("asgardandelion") {
                 @Override
                 public String getUnlocalizedLoreTextForStack(ItemStack stack) {
-                    return "tile.botania.flower.asgardandelion.lore";
+                    return "tile." + Reference.BOTANIA + ".flower.asgardandelion.lore";
                 }
             });
             BotaniaAPI.addSubTileToCreativeMenu("asgardandelion");
@@ -60,14 +59,14 @@ public class BotaniaCompat {
             BotaniaAPI.registerSubTileSignature(SubTileSoarleander.class, new BasicSignature("soarleander") {
                 @Override
                 public String getUnlocalizedLoreTextForStack(ItemStack stack) {
-                    return "tile.botania.flower.soarleander.lore";
+                    return "tile." + Reference.BOTANIA + ".flower.soarleander.lore";
                 }
             });
             BotaniaAPI.addSubTileToCreativeMenu("soarleander");
         }
         if (ModConfig.compats.botania.infinitato) {
             e.getRegistry().register(infinitato);
-            GameRegistry.registerTileEntity(TileInfinitato.class, new ResourceLocation(AvaritiaTweaks.MODID, "infinitato_tile"));
+            GameRegistry.registerTileEntity(TileInfinitato.class, new ResourceLocation(Reference.MODID, "infinitato_tile"));
         }
     }
 
@@ -75,16 +74,16 @@ public class BotaniaCompat {
         if (ModConfig.compats.botania.asgardandelion.enabled) {
             SubTileAsgardandelion.lexicon = new BotaniaLexiconEntry("asgardandelion", BotaniaAPI.categoryGenerationFlowers);
             SubTileAsgardandelion.lexicon.setLexiconPages(
-                    BotaniaAPI.internalHandler.textPage("botania.lexicon.asgardandelion.0")
+                    BotaniaAPI.internalHandler.textPage(Reference.BOTANIA + ".lexicon.asgardandelion.0")
             );
             SubTileAsgardandelion.lexicon.setIcon(asgardandelion);
         }
         if (ModConfig.compats.botania.soarleander.enabled) {
             SubTileSoarleander.lexicon = new BotaniaLexiconEntry("soarleander", BotaniaAPI.categoryGenerationFlowers);
             SubTileSoarleander.lexicon.setLexiconPages(
-                    BotaniaAPI.internalHandler.textPage("botania.lexicon.soarleander.0"),
-                    BotaniaAPI.internalHandler.runeRecipePage("botania.lexicon.soarleander.1", new RecipeRuneAltar(
-                            soarleander, 8000, ModUtils.getFlower("gourmaryllis"),
+                    BotaniaAPI.internalHandler.textPage(Reference.BOTANIA + ".lexicon.soarleander.0"),
+                    BotaniaAPI.internalHandler.runeRecipePage(Reference.BOTANIA + ".lexicon.soarleander.1", new RecipeRuneAltar(
+                            soarleander, 8000, ObjectHelper.getBotaniaFlower("gourmaryllis"),
                             new ItemStack(Items.CHICKEN), new ItemStack(Items.CHICKEN),
                             new ItemStack(Items.CHICKEN), new ItemStack(Items.CHICKEN),
                             new ItemStack(Items.CHICKEN), new ItemStack(Items.CHICKEN),
@@ -99,10 +98,10 @@ public class BotaniaCompat {
     public static void initModels() {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(gaiaBlock), 0, new ModelResourceLocation(gaiaBlock.getRegistryName(), "inventory"));
         if (ModConfig.compats.botania.asgardandelion.enabled) {
-            BotaniaAPIClient.registerSubtileModel(SubTileAsgardandelion.class, new ModelResourceLocation(AvaritiaTweaks.MODID + ":asgardandelion"));
+            BotaniaAPIClient.registerSubtileModel(SubTileAsgardandelion.class, new ModelResourceLocation(Reference.MODID + ":asgardandelion"));
         }
         if (ModConfig.compats.botania.soarleander.enabled) {
-            BotaniaAPIClient.registerSubtileModel(SubTileSoarleander.class, new ModelResourceLocation(AvaritiaTweaks.MODID + ":soarleander"));
+            BotaniaAPIClient.registerSubtileModel(SubTileSoarleander.class, new ModelResourceLocation(Reference.MODID + ":soarleander"));
         }
         if (ModConfig.compats.botania.infinitato) {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(infinitato), 0, new ModelResourceLocation(infinitato.getRegistryName(), "facing=south"));
@@ -111,19 +110,19 @@ public class BotaniaCompat {
     }
 
     public static void initRecipes() {
-        asgardandelion = ModUtils.getFlower("asgardandelion");
-        soarleander = ModUtils.getFlower("soarleander");
+        asgardandelion = ObjectHelper.getBotaniaFlower("asgardandelion");
+        soarleander = ObjectHelper.getBotaniaFlower("soarleander");
         if (ModConfig.compats.botania.gaiaBlock) {
             GameRegistry.addShapedRecipe(
-                    new ResourceLocation(AvaritiaTweaks.MODID, "gaia_ingots_to_block"), null, new ItemStack(gaiaBlock),
+                    new ResourceLocation(Reference.MODID, "gaia_ingots_to_block"), null, new ItemStack(gaiaBlock),
                     "XXX", "XXX", "XXX",
-                    'X', ObjectHelper.getItemStackByName("botania:manaresource", 1, 14)
+                    'X', ObjectHelper.getItemStackByName(Reference.BOTANIA, "manaresource", 1, 14)
             );
-            GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, "gaia_block_to_ingots"), null, ObjectHelper.getItemStackByName("botania:manaresource", 9, 14), Ingredient.fromStacks(new ItemStack(gaiaBlock)));
+            GameRegistry.addShapelessRecipe(new ResourceLocation(Reference.MODID, "gaia_block_to_ingots"), null, ObjectHelper.getItemStackByName(Reference.BOTANIA, "manaresource", 9, 14), Ingredient.fromStacks(new ItemStack(gaiaBlock)));
         }
         if (ModConfig.compats.botania.soarleander.enabled) {
             BotaniaAPI.registerRuneAltarRecipe(
-                    soarleander, 8000, ModUtils.getFlower("gourmaryllis"),
+                    soarleander, 8000, ObjectHelper.getBotaniaFlower("gourmaryllis"),
                     new ItemStack(Items.CHICKEN), new ItemStack(Items.CHICKEN),
                     new ItemStack(Items.CHICKEN), new ItemStack(Items.CHICKEN),
                     new ItemStack(Items.CHICKEN), new ItemStack(Items.CHICKEN),

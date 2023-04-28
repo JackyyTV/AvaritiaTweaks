@@ -48,13 +48,13 @@ repositories {
 
 dependencies {
   deobfCompile "mezz.jei:jei_1.12.2:+"
-  deobfCompile "curse.maven:hwyla:2568751" //1.8.26-B41_1.12.2
-  deobfCompile "curse.maven:gunpowderlib:2852431" //1.12.2-1.0
+  deobfCompile "curse.maven:hwyla-253449:2568751" //1.8.26-B41_1.12.2
+  deobfCompile "curse.maven:gunpowderlib-356646:3168863" //1.12.2-1.1
   deobfCompile "codechicken:CodeChickenLib:1.12.2-+:universal"
   deobfCompile("morph.avaritia:Avaritia:1.12.2-+:universal") {
       transitive = false
   }
-  deobfCompile "curse.maven:botania:2846950" //r1.10-363
+  deobfCompile "curse.maven:botania-225643:3330934" //r1.10-364.4
 }
 
 processResources {

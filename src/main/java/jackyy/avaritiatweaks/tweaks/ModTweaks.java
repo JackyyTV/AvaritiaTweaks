@@ -6,11 +6,13 @@ import jackyy.avaritiatweaks.compat.botania.BotaniaCompat;
 import jackyy.avaritiatweaks.config.ModConfig;
 import jackyy.avaritiatweaks.item.ItemEnhancementCrystal;
 import jackyy.avaritiatweaks.util.ModUtils;
+import jackyy.avaritiatweaks.util.Reference;
 import morph.avaritia.client.render.item.HaloRenderItem;
 import morph.avaritia.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -26,13 +28,13 @@ public class ModTweaks {
 
     public static void initItems(RegistryEvent.Register<Item> e) {
         e.getRegistry().register(enhancementCrystal);
-        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded(Reference.BOTANIA)) {
             BotaniaCompat.initItems(e);
         }
     }
 
     public static void initBlocks(RegistryEvent.Register<Block> e) {
-        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded(Reference.BOTANIA)) {
             BotaniaCompat.initBlocks(e);
         }
     }
@@ -52,26 +54,26 @@ public class ModTweaks {
             ModUtils.addEnhancementArmorRecipe("infinity_pants", new ItemStack(ModItems.infinity_pants), new ItemStack(ModItems.infinity_pants));
             ModUtils.addEnhancementArmorRecipe("infinity_boots", new ItemStack(ModItems.infinity_boots), new ItemStack(ModItems.infinity_boots));
             ModUtils.addEnhancementToolsRecipe("infinity_sword", new ItemStack(ModItems.infinity_sword), new ItemStack(ModItems.infinity_sword), ModConfig.infinityTools.infinitySwordEnchantments);
-            ModUtils.addEnhancementToolsRecipe("infinity_pickaxe", ModUtils.getInfPick(new ItemStack(ModItems.infinity_pickaxe)), ModUtils.getInfPick(new ItemStack(ModItems.infinity_pickaxe)), ModConfig.infinityTools.infinityPickaxeEnchantments);
+            ModUtils.addEnhancementToolsRecipe("infinity_pickaxe", ModUtils.getEnchantedItem(new ItemStack(ModItems.infinity_pickaxe), Enchantments.FORTUNE, 10), ModUtils.getEnchantedItem(new ItemStack(ModItems.infinity_pickaxe), Enchantments.FORTUNE, 10), ModConfig.infinityTools.infinityPickaxeEnchantments);
             ModUtils.addEnhancementToolsRecipe("infinity_axe", new ItemStack(ModItems.infinity_axe), new ItemStack(ModItems.infinity_axe), ModConfig.infinityTools.infinityAxeEnchantments);
             ModUtils.addEnhancementToolsRecipe("infinity_shovel", new ItemStack(ModItems.infinity_shovel), new ItemStack(ModItems.infinity_shovel), ModConfig.infinityTools.infinityShovelEnchantments);
             ModUtils.addEnhancementToolsRecipe("infinity_hoe", new ItemStack(ModItems.infinity_hoe), new ItemStack(ModItems.infinity_hoe), ModConfig.infinityTools.infinityHoeEnchantments);
             ModUtils.addEnhancementToolsRecipe("infinity_bow", new ItemStack(ModItems.infinity_bow), new ItemStack(ModItems.infinity_bow), ModConfig.infinityTools.infinityBowEnchantments);
         }
-        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded(Reference.BOTANIA)) {
             BotaniaCompat.initRecipes();
         }
     }
 
     public static void initIntegrations() {
-        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded(Reference.BOTANIA)) {
             BotaniaCompat.init();
         }
     }
 
     @SideOnly(Side.CLIENT)
     public static void initIntegrationsClient() {
-        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded("botania")) {
+        if (ModConfig.compats.botaniaCompat && Loader.isModLoaded(Reference.BOTANIA)) {
             BotaniaCompat.initModels();
         }
     }

@@ -3,8 +3,6 @@ itemGroup.avaritiatweaks=Avaritia Tweaks
 
 #Key Bindings
 key.categories.avaritiatweaks=Avaritia Tweaks
-key.infinity_armor.noclip=Toggle No Clip Mode
-key.infinity_armor.noclip.disabled=Toggle No Clip Mode (Disabled in config!)
 
 #Items
 item.avaritiatweaks.enhancement_crystal.name=Enhancement Crystal
@@ -14,13 +12,8 @@ tile.avaritiatweaks.gaia_block.name=Gaia Block
 
 #Tooltips
 tooltips.avaritiatweaks.enhancement_crystal=Infinity isn't even enough.
-tooltips.avaritiatweaks.noclip.enabled=No Clip Mode: §a§lEnabled§r
-tooltips.avaritiatweaks.noclip.disabled=No Clip Mode: §c§lDisabled§r
 tooltips.avaritiatweaks.infinite=Infinite
-
-#Messages
-msg.avaritiatweaks.noclip.enabled=No Clip Mode is now §aEnabled§r
-msg.avaritiatweaks.noclip.disabled=No Clip Mode is now §cDisabled§r
+tooltips.avaritiatweaks.enhanced=Enhanced
 
 #JEI Integration
 desc.avaritiatweaks.neutron_pile=Produced from Neutron Collector.

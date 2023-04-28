@@ -1,7 +1,7 @@
 package jackyy.avaritiatweaks.compat.botania.block;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.compat.botania.tile.TileInfinitato;
+import jackyy.avaritiatweaks.util.Reference;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -31,9 +31,9 @@ public class BlockInfinitato extends BlockContainer implements ILexiconable {
     public BlockInfinitato() {
         super(Material.CLOTH);
         setRegistryName("infinitato");
-        setTranslationKey(AvaritiaTweaks.MODID + ".infinitato");
+        setTranslationKey(Reference.MODID + ".infinitato");
         setHardness(0.25F);
-        setCreativeTab(AvaritiaTweaks.TAB);
+        setCreativeTab(Reference.TAB);
     }
 
     @Override @SuppressWarnings("deprecation")

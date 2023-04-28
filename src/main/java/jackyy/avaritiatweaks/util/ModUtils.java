@@ -1,12 +1,10 @@
 package jackyy.avaritiatweaks.util;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.tweaks.ModTweaks;
-import jackyy.gunpowderlib.helper.ObjectHelper;
 import morph.avaritia.item.ItemArmorInfinity;
+import morph.avaritia.item.tools.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -18,16 +16,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModUtils {
 
-    public static ItemStack getFlower(String type) {
-        ItemStack flower = ObjectHelper.getItemStackByName("botania:specialflower", 1, 0);
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setString("type", type);
-        flower.setTagCompound(tag);
-        return flower;
-    }
-
-    public static ItemStack getInfPick(ItemStack stack) {
-        stack.addEnchantment(Enchantments.FORTUNE, 10);
+    public static ItemStack getEnchantedItem(ItemStack stack, Enchantment enchantment, int level) {
+        stack.addEnchantment(enchantment, level);
         return stack;
     }
 
@@ -39,8 +29,8 @@ public class ModUtils {
         } else {
             output.getTagCompound().setInteger("enhanced", 1);
         }
-        GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_upgrade"), null, output, Ingredient.fromStacks(input), Ingredient.fromStacks(new ItemStack(ModTweaks.enhancementCrystal)));
-        GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_remove"), null, input, Ingredient.fromStacks(output));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(Reference.MODID, name + "_upgrade"), null, output, Ingredient.fromStacks(input), Ingredient.fromStacks(new ItemStack(ModTweaks.enhancementCrystal)));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(Reference.MODID, name + "_remove"), null, input, Ingredient.fromStacks(output));
     }
 
     public static void addEnhancementToolsRecipe(String name, ItemStack input, ItemStack output, String[] enchants) {
@@ -59,14 +49,24 @@ public class ModUtils {
                 output.addEnchantment(enchantment, level);
             }
         }
-        GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_upgrade"), null, output, Ingredient.fromStacks(input), Ingredient.fromStacks(new ItemStack(ModTweaks.enhancementCrystal)));
-        GameRegistry.addShapelessRecipe(new ResourceLocation(AvaritiaTweaks.MODID, name + "_remove"), null, input, Ingredient.fromStacks(output));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(Reference.MODID, name + "_upgrade"), null, output, Ingredient.fromStacks(input), Ingredient.fromStacks(new ItemStack(ModTweaks.enhancementCrystal)));
+        GameRegistry.addShapelessRecipe(new ResourceLocation(Reference.MODID, name + "_remove"), null, input, Ingredient.fromStacks(output));
     }
 
     public static boolean isArmorValid(EntityPlayer player, EntityEquipmentSlot slot) {
         ItemStack armor = player.getItemStackFromSlot(slot);
-        return armor != ItemStack.EMPTY && armor.getItem() instanceof ItemArmorInfinity
+        return !armor.isEmpty() && armor.getItem() instanceof ItemArmorInfinity
                 && armor.getTagCompound() != null && armor.getTagCompound().getInteger("enhanced") == 1;
+    }
+
+    public static boolean isEnhanced(ItemStack stack) {
+        return !stack.isEmpty() && (stack.getItem() instanceof ItemArmorInfinity
+                || stack.getItem() instanceof ItemSwordInfinity
+                || stack.getItem() instanceof ItemPickaxeInfinity
+                || stack.getItem() instanceof ItemAxeInfinity
+                || stack.getItem() instanceof ItemShovelInfinity
+                || stack.getItem() instanceof ItemBowInfinity)
+                && stack.getTagCompound() != null && stack.getTagCompound().getInteger("enhanced") == 1;
     }
 
     public static void checkAndAddEffect(EntityPlayer player, String[] potions) {

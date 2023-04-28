@@ -24,7 +24,7 @@ public class TileInfinitato extends TileTinyPotato {
 
     public void interact(EntityPlayer player, EnumHand hand, ItemStack stack, EnumFacing side) {
         jump();
-        if(name.equalsIgnoreCase("shia labeouf") && !world.isRemote && nextDoIt == 0) {
+        if (name.equalsIgnoreCase("shia labeouf") && !world.isRemote && nextDoIt == 0) {
             nextDoIt = 40;
             world.playSound(player, player.getPosition(), ObjectHelper.getSoundByName("botania", "doit"),
                     SoundCategory.BLOCKS, 2.5F, 0.7F);
@@ -66,13 +66,13 @@ public class TileInfinitato extends TileTinyPotato {
 
     @Override
     public void update() {
-        if(jumpTicks > 0) {
+        if (jumpTicks > 0) {
             jumpTicks--;
             if (jumpTicks == 20 || jumpTicks == 0) {
                 this.world.createExplosion(null, getPos().getX() + 0.5, getPos().getY(), getPos().getZ() + 0.5, 0.0f, true);
             }
         }
-        if(nextDoIt > 0)
+        if (nextDoIt > 0)
             nextDoIt--;
     }
 
