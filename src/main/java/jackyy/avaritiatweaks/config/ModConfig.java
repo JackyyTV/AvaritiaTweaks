@@ -1,7 +1,7 @@
 package jackyy.avaritiatweaks.config;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
 import jackyy.avaritiatweaks.util.ModUtils;
+import jackyy.avaritiatweaks.util.Reference;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Configuration;
@@ -14,7 +14,7 @@ import java.lang.invoke.MethodHandle;
 import java.util.Map;
 import java.util.Optional;
 
-@Config(modid = AvaritiaTweaks.MODID, name = "AvaritiaTweaks")
+@Config(modid = Reference.MODID, name = "AvaritiaTweaks")
 public class ModConfig {
 
     public static Tweaks tweaks = new Tweaks();
@@ -148,15 +148,15 @@ public class ModConfig {
                             .filter(entry -> fileName.equals(new File(entry.getKey()).getName())).findFirst();
                     entryOptional.ifPresent(stringConfigurationEntry -> config = stringConfigurationEntry.getValue());
                 } catch (Throwable throwable) {
-                    AvaritiaTweaks.logger.error("Failed to get Configuration instance!", throwable);
+                    Reference.LOGGER.error("Failed to get Configuration instance!", throwable);
                 }
             }
             return config;
         }
         @SubscribeEvent
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals(AvaritiaTweaks.MODID)) {
-                ConfigManager.load(AvaritiaTweaks.MODID, Config.Type.INSTANCE);
+            if (event.getModID().equals(Reference.MODID)) {
+                ConfigManager.load(Reference.MODID, Config.Type.INSTANCE);
             }
         }
     }

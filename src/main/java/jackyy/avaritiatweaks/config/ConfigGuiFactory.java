@@ -1,6 +1,6 @@
 package jackyy.avaritiatweaks.config;
 
-import jackyy.avaritiatweaks.AvaritiaTweaks;
+import jackyy.avaritiatweaks.util.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
@@ -36,7 +36,7 @@ public class ConfigGuiFactory implements IModGuiFactory {
         private static Configuration config = ModConfig.ConfigHolder.getConfig();
         public ConfigGui(GuiScreen parentScreen) {
             super(parentScreen, new ArrayList<>(new ConfigElement(config.getCategory("general")).getChildElements()),
-                    AvaritiaTweaks.MODID, false, false, GuiConfig.getAbridgedConfigPath(config.toString()));
+                    Reference.MODID, false, false, GuiConfig.getAbridgedConfigPath(config.toString()));
         }
         @Override
         public void onGuiClosed() {
