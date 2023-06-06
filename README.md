@@ -18,7 +18,7 @@ Submit any bug reports / suggestions via [issue tracker](https://github.com/Jack
 ## Contact Me
 
 - Twitter DM - [@JackyyTV](https://twitter.com/JackyyTV)
-- Discord DM - Jacky#1234
+- Discord DM - [jackyytv](https://jackyy.hk/discord)
 - Twitch PM - [Jackyy](https://www.twitch.tv/jackyy)
 - Reddit DM - [JackyyTV](https://www.reddit.com/message/compose/?to=JackyyTV)
 
